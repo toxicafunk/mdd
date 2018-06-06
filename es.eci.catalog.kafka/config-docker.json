@@ -1,0 +1,32 @@
+{
+    "consumer": {
+        "address": "test.consumer.address",
+        "groupId": "test-group",
+        "kafkaTopic": "test",
+        "zk": "172.17.0.1:2181",
+        "offsetReset": "largest",
+        "maxUnacknowledged": 100,
+        "maxUncommitted": 1000,
+        "ackTimeoutSeconds": 600,
+        "maxRetries": 100,
+        "initialRetryDelaySeconds": 1,
+        "maxRetryDelaySeconds": 10,
+        "eventBusSendTimeout": 30,
+        "bootstrap.servers": "172.17.0.1:32775",
+        "decoderAddress": "logical.decoder"
+    },
+    
+    "producer": {
+        "address": "test.producer.address",
+        "defaultTopic": "postgres_commits",
+        "brokerList": "172.17.0.1:32775",
+        "requiredAcks": 1,
+        "type": "async",
+        "maxRetries": 3,
+        "retryBackoffMs": 100,
+        "bufferingMaxMs": 5000,
+        "bufferingMaxMessages": 10000,
+        "enqueueTimeout": -1,
+        "batchMessageNum": 200
+    }
+}

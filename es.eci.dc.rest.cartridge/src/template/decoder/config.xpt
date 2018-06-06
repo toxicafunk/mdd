@@ -1,0 +1,21 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FILE "config.json"-»
+{
+    "postgresql": {
+		"address": {
+			"host": "localhost",
+			"port": 5432
+		},
+		"enableLogicalDecoding": true,
+		"dbname": "«name.toLowerCase()»",
+		"username": "postgres"
+	},
+	
+	"vertx": {
+		"address": "logical.decoder"
+	}
+}
+«ENDFILE-»
+«ENDDEFINE-»

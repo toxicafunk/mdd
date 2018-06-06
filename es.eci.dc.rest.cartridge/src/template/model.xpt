@@ -1,0 +1,54 @@
+«IMPORT dc»
+«DEFINE main FOR Domain»
+	«FILE "model.ecore"-»
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage 
+		xmi:version="2.0" 
+		xmlns:xmi="http://www.omg.org/XMI" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+		name="«name»" 
+		nsURI="http://www.mdmdm.org/«name.toLowerCase()»" 
+		nsPrefix="«name.toLowerCase()»">
+		«FOREACH attributeSets AS entity-»
+	<eClassifiers xsi:type="ecore:EClass" name="«entity.name.toFirstUpper()»"«IF entity.attributeSets != null» eSuperTypes="«FOREACH entity.attributeSets AS attributeSet»#//«attributeSet.name» «ENDFOREACH»"«ENDIF»>
+			«FOREACH entity.attributes AS attribute-»
+				«IF attribute.type.toString() == AttributeType::ENTITY.toString()-»
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="«attribute.name.toFirstLower()»"
+				lowerBound="0"
+				upperBound="«IF attribute.cardinality.toString() == AttributeCardinality::ONE.toString()»1«ELSE»-1«ENDIF»"
+				eType="#//«attribute.entity.name.toFirstUpper()»"/>
+				«ELSE-»
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="«attribute.name.toFirstLower()»"
+				lowerBound="0"
+				upperBound="«IF attribute.cardinality.toString() == AttributeCardinality::ONE.toString()»1«ELSE»-1«ENDIF»"
+					«IF attribute.type.toString() == AttributeType::STRING.toString()-»
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					«ELSEIF attribute.type.toString() == AttributeType::DATE.toString()
+							|| attribute.type.toString() == AttributeType::TIMESTAMP.toString()»
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					«ELSEIF attribute.type.toString() == AttributeType::NUMBER.toString()»
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					«ELSEIF attribute.type.toString() == AttributeType::BOOLEAN.toString()»
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"				
+					«ELSEIF attribute.type.toString() == AttributeType::NUMBER.toString()»
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					«ELSEIF attribute.type.toString() == AttributeType::NUMBER.toString()»
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					«ELSEIF attribute.type.toString() == AttributeType::NUMBER.toString()»
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					«ELSE»
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					«ENDIF»
+				/>
+				«ENDIF-»
+			«ENDFOREACH-»
+	</eClassifiers>
+		«ENDFOREACH-»
+</ecore:EPackage>
+«ENDFILE-»
+«ENDDEFINE-»

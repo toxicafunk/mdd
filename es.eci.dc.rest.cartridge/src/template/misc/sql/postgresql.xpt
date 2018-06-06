@@ -1,0 +1,185 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FILE "misc/sql/postgresql.sql"-»
+
+create extension if not exists unaccent;
+alter text search configuration spanish
+  alter mapping for hword, hword_part, word with unaccent, spanish_stem;
+		«LET {}.toSet() AS entities-»
+			«FOREACH attributeSets AS attributeSet-»
+				«IF attributeSet.metaType == dc::Entity-»
+					«entities.add(attributeSet) -> ''-»
+				«ENDIF-»
+			«ENDFOREACH-»
+			«FOREACH entities AS entity-»
+				«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+    				«IF attribute.type == AttributeType::ENTITY-»
+    					«IF attribute.cardinality == AttributeCardinality::ONE-»
+alter table if exists «underscored(((Entity) entity).pluralName).toUpperCase()» 
+  drop constraint «underscored(((Entity) entity).pluralName).toUpperCase()»_«underscored(attribute.name).toUpperCase()»; 
+
+    					«ENDIF-»
+    				«ENDIF-»
+				«ENDFOREACH-»
+			«ENDFOREACH-»	
+			«FOREACH entities AS entity-»
+				«IF getAllAttributes((Entity) entity).select(e | e.enableUniqueBoxSearch).size > 0-»
+drop trigger if exists «underscored(((Entity) entity).pluralName).toUpperCase()»_SEARCH_TRG on «underscored(((Entity) entity).pluralName).toUpperCase()»;
+				«ENDIF-»
+			«ENDFOREACH-»
+
+			«FOREACH entities AS entity-»
+				«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+					«IF attribute.label || attribute.sortable-»
+drop index if exists «underscored(((Entity) entity).pluralName).toUpperCase()»_«underscored(attribute.name).toUpperCase()»_IDX;
+					«ENDIF-»
+				«ENDFOREACH-»
+			«ENDFOREACH-»
+
+			«FOREACH entities AS entity-»
+drop table if exists «underscored(((Entity) entity).pluralName).toUpperCase()»;
+			«ENDFOREACH-»
+
+create or replace function update_last_modified_column()
+  returns trigger as $$
+  begin
+    new._LAST_MODIFIED = now();
+    return new;
+  end;
+  $$ language 'plpgsql';
+			«FOREACH entities AS entity-»
+
+create table «underscored(((Entity) entity).pluralName).toUpperCase()» (
+  _ID serial not null primary key, 
+				«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+					«IF attribute.type == AttributeType::BOOLEAN-»
+  «underscored(attribute.name).toUpperCase()» boolean,
+					«ELSEIF attribute.type == AttributeType::DATE-»
+  «underscored(attribute.name).toUpperCase()» varchar,
+					«ELSEIF attribute.type == AttributeType::ENTITY-»
+						«IF attribute.cardinality == AttributeCardinality::MANY-»
+							«IF attribute.containment-»
+  «underscored(attribute.name).toUpperCase()» integer[],
+							«ELSE-»
+  «underscored(attribute.name).toUpperCase()» integer[],
+							«ENDIF-»
+						«ELSE-»
+  «underscored(attribute.name).toUpperCase()» integer,
+						«ENDIF-»
+					«ELSEIF attribute.type == AttributeType::IMAGE-»
+						«IF attribute.cardinality == AttributeCardinality::MANY-»
+  «underscored(attribute.name).toUpperCase()» varchar[],
+						«ELSE-»
+  «underscored(attribute.name).toUpperCase()» varchar,
+						«ENDIF-»
+					«ELSEIF attribute.type == AttributeType::NUMBER-»
+  «underscored(attribute.name).toUpperCase()» real,
+					«ELSEIF attribute.type == AttributeType::PASSWORD-»
+  «underscored(attribute.name).toUpperCase()» varchar,
+					«ELSEIF attribute.type == AttributeType::RICH_TEXT-»
+						«IF attribute.enableI18N-»
+  «underscored(attribute.name).toUpperCase()» varchar,
+						«ELSE-»
+  «underscored(attribute.name).toUpperCase()» varchar,
+						«ENDIF-»
+					«ELSEIF attribute.type == AttributeType::STRING-»
+						«IF attribute.cardinality == AttributeCardinality::MANY-»
+  «underscored(attribute.name).toUpperCase()» varchar[],
+						«ELSE-»
+							«IF attribute.enableI18N-»
+  «underscored(attribute.name).toUpperCase()» varchar,
+							«ELSE-»
+  «underscored(attribute.name).toUpperCase()» varchar,
+							«ENDIF-»
+						«ENDIF-»
+					«ELSEIF attribute.type == AttributeType::TIMESTAMP-»
+  «underscored(attribute.name).toUpperCase()» varchar,
+					«ELSEIF attribute.type == AttributeType::VIDEO-»
+  «underscored(attribute.name).toUpperCase()» varchar,
+					«ENDIF-»
+				«ENDFOREACH-»
+  _SEARCH tsvector,
+  _TYPES varchar[],
+  _LAST_MODIFIED varchar default current_timestamp,
+  _VERSION integer DEFAULT 1);
+
+create trigger «underscored(((Entity) entity).pluralName).toUpperCase()»_UPDATE_LAST_MODIFIED
+  before update 
+  on «underscored(((Entity) entity).pluralName).toUpperCase()»
+  for each row 
+  execute procedure update_last_modified_column();
+			«ENDFOREACH-»
+			«FOREACH entities AS entity-»
+				«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+					«IF attribute.label || attribute.sortable-»
+
+create index «underscored(((Entity) entity).pluralName).toUpperCase()»_«underscored(attribute.name).toUpperCase()»_IDX
+  on «underscored(((Entity) entity).pluralName).toUpperCase()»(«underscored(attribute.name).toUpperCase()»);
+					«ENDIF-»
+				«ENDFOREACH-»
+			«ENDFOREACH-»
+			«FOREACH entities AS entity-»
+				«IF getAllAttributes((Entity) entity).select(e | e.enableUniqueBoxSearch).size > 0-»
+
+create trigger «underscored(((Entity) entity).pluralName).toUpperCase()»_SEARCH_TRG
+  before insert or update 
+  on «underscored(((Entity) entity).pluralName).toUpperCase()» 
+  for each row 
+  execute procedure tsvector_update_trigger(_SEARCH, 'pg_catalog.spanish'«FOREACH getAllAttributes((Entity) entity).select(e | e.enableUniqueBoxSearch) AS attribute-», «underscored(attribute.name).toUpperCase()»«ENDFOREACH-»);
+
+create index «underscored(((Entity) entity).pluralName).toUpperCase()»_SEARCH_IDX 
+  on «underscored(((Entity) entity).pluralName).toUpperCase()»
+  using gin(_search);
+				«ENDIF-»
+			«ENDFOREACH-»
+			«FOREACH entities AS entity-»
+				«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+    				«IF attribute.type == AttributeType::ENTITY-»
+						«IF attribute.cardinality == AttributeCardinality::ONE-»
+
+alter table «underscored(((Entity) entity).pluralName).toUpperCase()» 
+  add constraint «underscored(((Entity) entity).pluralName).toUpperCase()»_«underscored(attribute.name).toUpperCase()»
+  foreign key («underscored(attribute.name).toUpperCase()») references «underscored(attribute.entity.pluralName).toUpperCase()»(_ID);
+	    				«ENDIF-»
+    				«ENDIF-»
+				«ENDFOREACH-»
+			«ENDFOREACH-»
+		«ENDLET-»
+		«FOREACH initialDataLoads AS initialDataLoad-»
+			«FOREACH initialDataLoad.values AS record-»
+
+insert into «underscored(initialDataLoad.entity.pluralName).toUpperCase()» (
+				«FOREACH initialDataLoad.attributes.split(";") AS attribute ITERATOR i-»
+    «underscored(attribute).toUpperCase()»,
+				«ENDFOREACH-»
+	_TYPES
+  ) 
+  VALUES (
+				«FOREACH record.split(";") AS value ITERATOR i-»
+					«LET ((List[Attribute]) getAllAttributes(initialDataLoad.entity)).select(e|e.name == initialDataLoad.attributes.split(";").get(i.counter0)) AS initLoad »
+						«IF !initLoad.isEmpty»
+				    		«EXPAND value(value, initLoad.get(0))-»
+				    	«ELSE-»
+				    	-- «value»
+				    	«ENDIF-»
+				    «ENDLET -»
+				«ENDFOREACH-»
+    '{"«initialDataLoad.entity.name»"«FOREACH initialDataLoad.attributeSets AS attributeSet-», "«attributeSet.name»"«ENDFOREACH-»}'
+  );
+			«ENDFOREACH-»
+		«ENDFOREACH-»
+«ENDFILE-»
+«ENDDEFINE-»
+
+«DEFINE value(String value, Attribute attribute) FOR Domain-»
+	«IF value.split("\\|").size > 1-»
+    (select _ID from «underscored(attribute.entity.pluralName).toUpperCase()» where «underscored(value.split("\\|").get(0)).toUpperCase()» = '«value.split("\\|").get(1)»'),
+	«ELSE-»
+		«IF attribute.metaType == AttributeType::NUMBER-»
+    «value»,
+	    «ELSE-»
+    '«value»',
+		«ENDIF-»
+	«ENDIF-»
+«ENDDEFINE-»

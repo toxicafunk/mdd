@@ -1,0 +1,54 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+«FILE "src/main/java/es/eci/catalog/model/converters/BeanPOJOConverter.java"-»
+
+package es.eci.catalog.model.converters;
+
+import static es.eci.catalog.model.Tables.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.jooq.DSLContext;
+
+import es.eci.catalog.model.pojos.*;
+import es.eci.catalog.model.pojos.db.*;
+import es.eci.catalog.model.tables.records.*;
+import es.eci.catalog.model.tables.records.SuppliersRecord;
+
+public class BeanPOJOConverter {
+
+	«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entityM-»
+  	«LET ((Entity) entityM) AS entity-»
+  public static «entity.name» to«entity.name»(DSLContext create, «entity.name»Bean bean) {
+		«entity.name» entity = new «entity.name»();
+		
+		entity.setId(bean.getId());
+		«FOREACH getAllAttributes(entity) AS attribute-»
+			«IF attribute.isEntity()-»
+				«IF attribute.cardinality == AttributeCardinality::MANY-»
+		List<«attribute.entity.name»Bean> «attribute.name»Beans = create.select().from(«underscored(attribute.entity.pluralName).toUpperCase()»).where(«underscored(attribute.entity.pluralName).toUpperCase()»._ID.in(bean.get«attribute.name.toFirstUpper()»())).fetchInto(«attribute.entity.name»Bean.class);
+		List<«attribute.entity.name»> «attribute.name» = «attribute.name»Beans.stream().map(b -> to«attribute.entity.name»(create, b)).collect(Collectors.toList());
+		entity.set«attribute.name.toFirstUpper()»(«attribute.name»);
+				«ELSE-»
+		«attribute.entity.pluralName»Record «attribute.name»Record = create.fetchOne(«attribute.entity.pluralName.toUpperCase()», «attribute.entity.pluralName.toUpperCase()»._ID.eq(bean.get«attribute.name.toFirstUpper()»()));
+		if («attribute.name»Record != null) {
+			«attribute.getJavaModelType()»Bean «attribute.name» = new «attribute.getJavaModelType()»Bean();
+			«attribute.name»Record.into(«attribute.name»);
+			entity.set«attribute.name.toFirstUpper()»(to«attribute.entity.name»(create, «attribute.name»));
+		}
+				«ENDIF-»
+			«ELSE-»
+		entity.set«attribute.name.toFirstUpper()»(bean.get«attribute.name.toFirstUpper()»());
+			«ENDIF-»
+		«ENDFOREACH-»
+		
+		return entity;
+	}
+	
+  «ENDLET-»
+  «ENDFOREACH-»
+}
+«ENDFILE-»
+«ENDDEFINE-»

@@ -1,0 +1,18 @@
+{
+	"postgresql": {
+		"initial.load.script.path": "/usr/app/misc/sql/postgresql.sql",
+		"address": {
+			"host": "postgresql",
+			"port": 5432
+		},
+		"enableLogicalDecoding": true,
+		"dbname": "marketplacecatalog",
+		"username": "postgres"
+	},
+	
+	"vertx": {
+		"port": 8002,
+		"server.key.path": "/usr/app/misc/tls/serverkeynew.pem",
+		"server.cert.path": "/usr/app/misc/tls/servercert.pem"
+	}
+}

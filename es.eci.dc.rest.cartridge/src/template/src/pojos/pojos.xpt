@@ -1,0 +1,59 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entityM-»
+		«LET ((Entity) entityM) AS entity»
+		«FILE "src/main/java/es/eci/catalog/model/pojos/" + entity.name + ".java"-»
+
+package es.eci.catalog.model.pojos;
+
+
+import java.io.Serializable;
+import java.util.List;
+
+public class «entity.name» implements Serializable {
+
+	private static final long serialVersionUID = «entity.generateUID()»L;
+
+	private Integer id;	
+	«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+	private «attribute.getJavaModelType()» «attribute.name»;
+	«ENDFOREACH-»
+	
+	public «entity.name»() {}
+	
+	public «entity.name»(
+		Integer id,
+	«FOREACH getAllAttributes((Entity) entity) AS attribute SEPARATOR ','-»
+	«attribute.getJavaModelType()» «attribute.name»
+	«ENDFOREACH-»
+	) {
+		this.id = id;
+	«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+		this.«attribute.name» = «attribute.name»;
+	«ENDFOREACH-»
+	}
+	
+	
+	public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    	
+	«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+  	public «attribute.getJavaModelType()» get«attribute.name.toFirstUpper()»() {
+  		return this.«attribute.name»;
+  	}
+  	
+  	public void set«(attribute.name).toFirstUpper()»(«attribute.getJavaModelType()» «attribute.name») {
+  		this.«attribute.name» = «attribute.name»;
+  	}
+	«ENDFOREACH-»
+}			
+		«ENDFILE-»
+		«ENDLET-»
+ 	«ENDFOREACH-»
+«ENDDEFINE-»

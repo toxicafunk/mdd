@@ -1,0 +1,103 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FILE "src/main/java/main/Main.java"-»
+package main;
+
+
+import com.hubrick.vertx.kafka.consumer.property.KafkaConsumerProperties;
+import com.hubrick.vertx.kafka.producer.KafkaProducerService;
+import com.hubrick.vertx.kafka.producer.model.KafkaOptions;
+import com.hubrick.vertx.kafka.producer.model.StringKafkaMessage;
+
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.DeploymentOptions;
+import io.vertx.core.Future;
+import io.vertx.core.eventbus.DeliveryOptions;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+
+«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entity-»
+import services.«((Entity) entity).pluralName.toLowerCase()».«((Entity) entity).pluralName»Codec;
+import services.«((Entity) entity).pluralName.toLowerCase()».«((Entity) entity).pluralName»InverseCodec;
+«ENDFOREACH-»
+
+
+/**
+ * * Run with:
+ *  java -jar target/dc-kafka-integrations-1.0-SNAPSHOT-fat.jar -conf config.json
+ *  
+ * @author erodriguez
+ *
+ */
+public class Main extends AbstractVerticle {
+	
+	final Logger logger = LoggerFactory.getLogger(Main.class);
+	
+	@Override
+	public void start(Future<Void> fut) throws Exception {
+	
+		«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entity-»
+		vertx.eventBus().registerCodec(new «((Entity) entity).pluralName»Codec());
+		vertx.eventBus().registerCodec(new «((Entity) entity).pluralName»InverseCodec());
+		«ENDFOREACH-»
+		
+		JsonObject consumerConfig = (JsonObject) config().getValue("consumer");
+		JsonObject producerConfig = (JsonObject) config().getValue("producer");
+		
+		final DeploymentOptions deploymentOptions = new DeploymentOptions();
+		deploymentOptions.setConfig(consumerConfig);
+	
+		vertx.eventBus().consumer(consumerConfig.getString(KafkaConsumerProperties.KEY_VERTX_ADDRESS), message -> {
+			String categoryname = (String) message.body();
+            System.out.println("category name from Kafka: " + categoryname);
+            message.reply("OK!"); // Acknowledge to the Kafka Module that the message has been handled
+            String cat = String.format("{ \"name\": \"%s\", \"parentCategory\": 21, \"_Id\": 97, \"_Types\": [  \"Category\" ]}", categoryname);
+            DeliveryOptions options = new DeliveryOptions();
+			options.setCodecName("categorycodec");
+        	vertx.eventBus().send("services.categories.patch", new JsonObject(cat), options);
+        });
+		
+		vertx.deployVerticle("service:com.hubrick.services.kafka-consumer", deploymentOptions, result -> {
+			if (result.failed()) {
+				result.cause().printStackTrace();
+				return;
+			}
+
+			logger.info("KafkaConsumer is listening: " + result.result());
+		});
+		
+		deploymentOptions.setConfig(producerConfig);
+		vertx.deployVerticle("service:com.hubrick.services.kafka-producer", deploymentOptions, result -> {
+			if (result.failed()) {
+				result.cause().printStackTrace();
+				return;
+			}
+
+			logger.info("KafkaProducer is listening: " + result.result());
+		});
+		
+		final KafkaProducerService kafkaProducerService = KafkaProducerService.createProxy(vertx, producerConfig.getString("address"));
+		
+		vertx.eventBus().consumer(consumerConfig.getString("decoderAddress"), message -> {
+			JsonObject postgresJson = (JsonObject) message.body();
+			logger.info("Kafka main: " + postgresJson);
+			kafkaProducerService.sendString(new StringKafkaMessage(postgresJson.toString()), new KafkaOptions(producerConfig).setTopic(producerConfig.getString("defaultTopic")), response -> {
+		        if (response.succeeded()) {
+		        	logger.info("Decoder: OK");
+		        } else {
+		        	logger.error("Decoder: FAILED: " + response.result());
+		        }
+		    });
+			message.reply("OK");
+		});
+	}
+		
+	@Override
+	public void stop() throws Exception {
+		super.stop();
+	}
+}
+«ENDFILE-»
+«ENDDEFINE-»

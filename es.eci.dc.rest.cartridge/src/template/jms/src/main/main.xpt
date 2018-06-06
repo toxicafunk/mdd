@@ -1,0 +1,92 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FILE "src/main/java/main/Main.java"-»
+package main;
+
+«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entity-»
+import services.«((Entity) entity).pluralName.toLowerCase()».«((Entity) entity).pluralName»Codec;
+import services.«((Entity) entity).pluralName.toLowerCase()».«((Entity) entity).pluralName»InverseCodec;
+«ENDFOREACH-»
+
+import java.util.Optional;
+
+import javax.jms.ConnectionFactory;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.camel.CamelContext;
+import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.jms.JmsComponent;
+import org.apache.camel.impl.DefaultCamelContext;
+
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Future;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+
+
+/**
+ * * Run with:
+ *  java -jar target/dc-jms-integrations-1.0-SNAPSHOT-fat -conf config.json
+ *  
+ * @author erodriguez
+ *
+ */
+public class Main extends AbstractVerticle {
+	
+	final Logger logger = LoggerFactory.getLogger(Main.class);
+	
+	private CamelContext context;
+	private ConnectionFactory connectionFactory;
+	
+	private Optional<String> brokerUrl;
+	private Optional<String> queueName;
+	private Optional<String> outputDir;
+	private Optional<Integer> concurrentConsumers;
+	
+	@Override
+	public void start(Future<Void> fut) throws Exception {
+	
+		brokerUrl = Optional.ofNullable(config().getString("broker-url"));
+		queueName = Optional.ofNullable(config().getString("queue-name"));
+		outputDir = Optional.ofNullable(config().getString("output-dir"));
+		concurrentConsumers = Optional.ofNullable(config().getInteger("concurrent-consumers"));
+		
+		String connectionUrl = brokerUrl.orElse("tcp://localhost:61616");
+		connectionFactory = new ActiveMQConnectionFactory(connectionUrl);
+		
+		logger.info("Listening to broker: " + connectionUrl);
+	
+		«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entity-»
+		vertx.eventBus().registerCodec(new «((Entity) entity).pluralName»Codec());
+		vertx.eventBus().registerCodec(new «((Entity) entity).pluralName»InverseCodec());
+		«ENDFOREACH-»
+		
+		context = new DefaultCamelContext();
+		context.addComponent("jms-wpc", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+		context.addRoutes(buildWPCRoute());
+
+		context.start();		
+	}
+	
+	@Override
+	public void stop() throws Exception {
+		super.stop();
+		context.stop();
+	}
+	
+	private RouteBuilder buildWPCRoute() {
+        return new RouteBuilder() {
+            public void configure() {
+            	String jmsRouteConfig = String.format("jms-wpc:%s?concurrentConsumers=%d&asyncConsumer=true", queueName.orElse("test-queue"), concurrentConsumers.orElse(10));
+            	logger.info("JMS Route Config: " + jmsRouteConfig);
+            	
+            	from(jmsRouteConfig)
+            	.process(new WPCProcessor(vertx.eventBus()))
+            	.to(String.format("file:%s", outputDir.orElse("//tmp/out")));
+            }
+        };
+    }
+}
+«ENDFILE-»
+«ENDDEFINE-»

@@ -1,0 +1,85 @@
+{
+  "id_Ext": "762804013",
+  "id": "1391588396",
+  "entryContainerID": "999",
+  "movement": "MODIFIED",
+  "coreAttribs": [
+    {
+      "id": "/Product_HPS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "ExternalCode",
+          "type": "STRING",
+          "value": "762804013"
+        },
+        {
+          "id": "Key",
+          "type": "STRING",
+          "value": "1391588396"
+        },
+        {
+          "id": "Description",
+          "type": "STRING",
+          "children": [
+            {
+              "id": "es_ES",
+              "type": "STRING",
+              "value": "Bailarinas"
+            }
+          ]
+        },
+        {
+          "id": "Type",
+          "type": "LOOKUP_TABLE",
+          "featureGroupID": "1026",
+          "id_Ext": "43288090",
+          "value": "N"
+        },
+        {
+          "id": "KeyATG",
+          "type": "STRING",
+          "value": "1391588396"
+        },
+        {
+          "id": "Unpublish",
+          "type": "FLAG",
+          "value": "false"
+        },
+        {
+          "id": "BestSellersExcluded",
+          "type": "FLAG",
+          "value": "false"
+        },
+        {
+          "id": "Sangrado",
+          "type": "STRING_ENUMERATION",
+          "value": "null"
+        },
+        {
+          "id": "DiasNovedad",
+          "type": "STRING_ENUMERATION",
+          "value": "15"
+        },
+        {
+          "id": "ExcluidoAnunciadoEnTV",
+          "type": "FLAG",
+          "value": "false"
+        },
+        {
+          "id": "VerMas",
+          "type": "FLAG",
+          "value": "false"
+        }
+      ]
+    }
+  ],
+  "link": [
+    {
+      "id_Ext": "762803013",
+      "hierarchyId": "999",
+      "categoryId": "1391588344",
+      "order": "1"
+    }
+  ]
+}

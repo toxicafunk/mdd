@@ -1,0 +1,13 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FILE "config.json"-»
+{
+	"vertx": {
+		"port": 8004,
+		"server.key.path": "misc/tls/serverkeynew.pem",
+		"server.cert.path": "misc/tls/servercert.pem"
+	}
+}
+«ENDFILE-»
+«ENDDEFINE-»

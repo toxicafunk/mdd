@@ -1,0 +1,62 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+«FILE "src/main/java/es/eci/catalog/model/converters/POJOBeanConverter.java"-»
+
+package es.eci.catalog.model.converters;
+
+import static es.eci.catalog.model.Tables.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+import org.jooq.DSLContext;
+
+import es.eci.catalog.model.pojos.*;
+import es.eci.catalog.model.pojos.db.*;
+import es.eci.catalog.model.tables.records.*;
+
+public class POJOBeanConverter {
+
+	«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entityM-»
+  	«LET ((Entity) entityM) AS entity-»
+	public static «entity.name»Bean entity2Bean(DSLContext create, «entity.name» entity) {
+		«entity.name»Bean bean = new «entity.name»Bean();
+		bean.setId(entity.getId());
+		«FOREACH getAllAttributes(entity) AS attribute-»
+			«IF attribute.isEntity()-»
+				«IF attribute.cardinality == AttributeCardinality::MANY-»
+		Optional<«attribute.getJavaModelType()»> «attribute.name»Opt = Optional.ofNullable(entity.get«attribute.name.toFirstUpper()»());
+		List<Integer> «attribute.name»Ids = new ArrayList<Integer>();
+		@SuppressWarnings("unchecked")
+		«attribute.getJavaModelType()» «attribute.name»List = «attribute.name»Opt.orElse(Collections.EMPTY_LIST);
+		for («attribute.entity.name»  «attribute.name» : «attribute.name»List ) {
+			«attribute.entity.pluralName»Record «attribute.name»R = create.newRecord(«underscored(attribute.entity.pluralName).toUpperCase()», «attribute.name»);
+			«attribute.name»R.store();
+			«attribute.name»Ids.add(«attribute.name»R.get_Id());
+		}
+		bean.set«attribute.name.toFirstUpper()»(«attribute.name»Ids.toArray(new Integer[«attribute.name»Ids.size()]));
+				«ELSE-»
+		Optional<«attribute.getJavaModelType()»> «attribute.name»Opt = Optional.ofNullable(entity.get«attribute.name.toFirstUpper()»());
+		«attribute.getJavaModelType()» «attribute.name» = «attribute.name»Opt.orElse(new «attribute.getJavaModelType()»());
+		«attribute.entity.pluralName»Record «attribute.name»R = create.newRecord(«underscored(attribute.entity.pluralName).toUpperCase()», «attribute.name»);
+		«attribute.name»R.store();
+		bean.set«attribute.name.toFirstUpper()»(«attribute.name»R.get_Id());
+				«ENDIF-»
+			«ELSE-»
+		Optional<«attribute.getJavaModelType()»> «attribute.name»Opt = Optional.ofNullable(entity.get«attribute.name.toFirstUpper()»());
+		«attribute.getJavaModelType()» «attribute.name» = «attribute.name»Opt.orElse(«attribute.getDefaultValue()»);
+		bean.set«attribute.name.toFirstUpper()»(«attribute.name»);
+			«ENDIF-»
+		«ENDFOREACH-»
+		
+		return bean;
+	}
+	
+  «ENDLET-»
+  «ENDFOREACH-»
+}
+«ENDFILE-»
+«ENDDEFINE-»

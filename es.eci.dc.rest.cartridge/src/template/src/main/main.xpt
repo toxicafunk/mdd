@@ -1,0 +1,98 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FILE "src/main/java/main/Main.java"-»
+package main;
+
+«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entity-»
+import services.«((Entity) entity).pluralName.toLowerCase()».«((Entity) entity).pluralName»Codec;
+import services.«((Entity) entity).pluralName.toLowerCase()».«((Entity) entity).pluralName»InverseCodec;
+«ENDFOREACH-»
+
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.DeploymentOptions;
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+
+
+/**
+ * * Run with:
+ *  java -jar target/dc-integrations-1.0-SNAPSHOT-fat.jar -conf config.json
+ *  
+ * @author erodriguez
+ *
+ */
+public class Main extends AbstractVerticle {
+	
+	final Logger logger = LoggerFactory.getLogger(Main.class);
+	
+	protected final String CONTENT_TYPE_LABEL = "Content-Type";
+    protected final String CONTENT_TYPE_HEADER = "application/json; charset=utf-8";
+	
+	@Override
+	public void start(Future<Void> fut) throws Exception {
+	
+		«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entity-»
+		vertx.eventBus().registerCodec(new «((Entity) entity).pluralName»Codec());
+		vertx.eventBus().registerCodec(new «((Entity) entity).pluralName»InverseCodec());
+		«ENDFOREACH-»
+
+		JsonObject options;
+		«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entity-»
+		options = setDeploymentOptions("services.«((Entity) entity).pluralName.toLowerCase()».get");
+		vertx.deployVerticle("services.«((Entity) entity).pluralName.toLowerCase()».Get", 
+						new DeploymentOptions()
+						.setWorker(true)
+						.setConfig(options),
+				result -> {
+					logger.info("Deployed successfully to address services.«((Entity) entity).pluralName.toLowerCase()».get");
+				});
+		
+		options = setDeploymentOptions("services.«((Entity) entity).pluralName.toLowerCase()».patch");
+		vertx.deployVerticle("services.«((Entity) entity).pluralName.toLowerCase()».Patch",
+						new DeploymentOptions()
+						.setWorker(true)
+						.setConfig(options),
+				result -> {
+					logger.info("Deployed successfully to address services.«((Entity) entity).pluralName.toLowerCase()».patch");
+				});
+		
+		options = setDeploymentOptions("services.«((Entity) entity).pluralName.toLowerCase()».post");
+		vertx.deployVerticle("services.«((Entity) entity).pluralName.toLowerCase()».Post",
+						new DeploymentOptions()
+						.setWorker(true)
+						.setConfig(options),
+				result -> {
+					logger.info("Deployed successfully to address services.«((Entity) entity).pluralName.toLowerCase()».post");
+				});
+		
+		options = setDeploymentOptions("services.«((Entity) entity).pluralName.toLowerCase()».delete");
+		vertx.deployVerticle("services.«((Entity) entity).pluralName.toLowerCase()».Delete",
+						new DeploymentOptions()
+						.setWorker(true)
+						.setConfig(options),
+				result -> {
+					logger.info("Deployed successfully to address services.«((Entity) entity).pluralName.toLowerCase()».delete");
+				});
+		
+		«ENDFOREACH-»
+		vertx.deployVerticle("web.RestVerticle",
+						new DeploymentOptions()
+						.setWorker(true)
+						.setConfig(config()),
+				result -> {
+					logger.info("Deployed successfully RestVerticle");
+				});
+	}
+	
+	private JsonObject setDeploymentOptions(String address) {
+		JsonObject options = config().copy();
+		options.put("address", address);
+		return options;
+	}
+	
+}
+«ENDFILE-»
+«ENDDEFINE-»

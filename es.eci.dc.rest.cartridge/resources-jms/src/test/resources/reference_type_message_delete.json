@@ -1,0 +1,977 @@
+{
+  "id_Ext": "2595357001",
+  "id": "001002877501110",
+  "entryContainerID": "1",
+  "movement": "DELETED",
+  "coreAttribs": [
+    {
+      "id": "/Product_CPS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "ExternalCode",
+          "type": "STRING",
+          "value": "2595357001"
+        },
+        {
+          "id": "RefECI",
+          "type": "STRING",
+          "value": "001002877501111   "
+        },
+        {
+          "id": "General",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "TipoReferencia",
+              "type": "STRING",
+              "value": "02"
+            },
+            {
+              "id": "CodigoEmpresa",
+              "type": "STRING",
+              "value": "01"
+            },
+            {
+              "id": "EanGtin",
+              "type": "STRING",
+              "value": "104"
+            },
+            {
+              "id": "COTRATIE",
+              "type": "STRING",
+              "value": "MOD"
+            },
+            {
+              "id": "UnidadVenta",
+              "type": "STRING",
+              "value": "0001"
+            },
+            {
+              "id": "UnidadSurtidoCodificacion",
+              "type": "STRING",
+              "value": "0001"
+            },
+            {
+              "id": "SenalEntorno",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "395",
+              "id_Ext": "274979090",
+              "value": "MercancíageneralECI"
+            },
+            {
+              "id": "Serie",
+              "type": "STRING",
+              "value": "SEMILOGO"
+            },
+            {
+              "id": "CodigoModelo",
+              "type": "STRING",
+              "value": "41X5278"
+            },
+            {
+              "id": "DescripcionModelo",
+              "type": "STRING",
+              "value": "BOLSO_CARRYALL_FANTASIAFANTASI"
+            },
+            {
+              "id": "DescripcionModeloWeb",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "BolsodemujerDesigual"
+                },
+                {
+                  "id": "en_GB",
+                  "type": "STRING",
+                  "value": "Desigualwomen's handbag"
+                }
+              ]
+            },
+            {
+              "id": "Perecedero",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "Validated",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "Royaltis",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "PermiteDevolucion",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "StockInfinito",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "ReferenciaGenerica",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "PeticionPrecioDeVenta",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "ReferenciaDigital",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "AnillosDeCompromiso",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "ReferenciaDeLujo",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "ReferenciaMadre",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VentaSinStock",
+              "type": "FLAG",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "id": "ProveedorMarca",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "NumeroProveedor",
+              "type": "STRING",
+              "value": "12345678"
+            },
+            {
+              "id": "NombreProveedor",
+              "type": "STRING",
+              "value": "ABASIC, S.L."
+            },
+            {
+              "id": "Fabricante",
+              "type": "STRING",
+              "value": "0412460"
+            },
+            {
+              "id": "DescripcionFabricante",
+              "type": "STRING",
+              "value": "ABASIC, S.L."
+            },
+            {
+              "id": "Marca",
+              "type": "STRING",
+              "value": "DESIGUAL"
+            },
+            {
+              "id": "MarcaMostradaEnWeb",
+              "type": "RELATIONSHIP",
+              "groupID": "391",
+              "id_Ext": "147145056",
+              "value": "DESIGUAL"
+            }
+          ]
+        },
+        {
+          "id": "DescripcionCorta",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "DescripcionTicket",
+              "type": "STRING",
+              "value": "BOLSOS"
+            }
+          ]
+        },
+        {
+          "id": "GestionComprasStock",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "Calificacion1",
+              "type": "STRING",
+              "value": "NP"
+            },
+            {
+              "id": "Calificacion2",
+              "type": "STRING",
+              "value": "NP"
+            },
+            {
+              "id": "Calificacion4",
+              "type": "STRING",
+              "value": "VV"
+            },
+            {
+              "id": "Calificacion5",
+              "type": "STRING",
+              "value": "MA"
+            },
+            {
+              "id": "TipoDeGestion",
+              "type": "STRING",
+              "value": "14"
+            }
+          ]
+        },
+        {
+          "id": "DimensionesYPeso",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "UOM!Dimensiones!Unidad",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "204",
+              "id_Ext": "347186090",
+              "value": "cm"
+            },
+            {
+              "id": "UOM!PesoBruto!Unidad",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "206",
+              "id_Ext": "347187090",
+              "value": "g"
+            },
+            {
+              "id": "UOM!VolumenContenidoNeto!VolumenContenidoNeto",
+              "type": "NUMBER",
+              "value": "0.0"
+            },
+            {
+              "id": "UOM!VolumenContenidoNeto!Unidad",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "213",
+              "id_Ext": "347188090",
+              "value": "ml"
+            }
+          ]
+        },
+        {
+          "id": "ColoresYTallas",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "ColorFabricante",
+              "type": "STRING",
+              "value": "COLORES_4065"
+            },
+            {
+              "id": "DescripcionDelColor",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "135",
+              "id_Ext": "347197090",
+              "value": "Verde"
+            },
+            {
+              "id": "TamanoHorma",
+              "type": "STRING",
+              "value": "GRANDE_CERRADO"
+            }
+          ]
+        },
+        {
+          "id": "Variantes",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "CodigoVarianteWeb",
+              "type": "STRING",
+              "value": "A10329943"
+            },
+            {
+              "id": "VariantesTallas",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VariosColores",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VariantesModelos",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VariosTamanos",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VariosFormatos",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VariosTipoPiel",
+              "type": "FLAG",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "id": "Fechas",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "FechaDeAltaCompras",
+              "type": "DATE",
+              "value": "20131022_000000"
+            },
+            {
+              "id": "FechaDeAltaPrecatalogo",
+              "type": "DATE",
+              "value": "20131023_124032"
+            },
+            {
+              "id": "FechaDeAltaCatalogo",
+              "type": "DATE",
+              "value": "20131212_212937"
+            }
+          ]
+        },
+        {
+          "id": "Multimedia",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "Fotos",
+              "type": "GROUPING",
+              "children": [
+                {
+                  "id": "SecondaryFotos",
+                  "ocurrence": 0,
+                  "type": "GROUPING",
+                  "children": [
+                    {
+                      "id": "Id",
+                      "type": "STRING",
+                      "value": "1"
+                    },
+                    {
+                      "id": "UrlImagenT",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__100x100.jpg"
+                    },
+                    {
+                      "id": "UrlImagenX",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__40x40.jpg"
+                    },
+                    {
+                      "id": "UrlImagen324x410",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__324x410.jpg"
+                    },
+                    {
+                      "id": "UrlImagen600x759",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__600x759.jpg"
+                    },
+                    {
+                      "id": "UrlImagen1000x1265",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__1000x1265.jpg"
+                    },
+                    {
+                      "id": "UrlImagen50x63",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__50x63.jpg"
+                    },
+                    {
+                      "id": "UrlImagen1200x967",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__967x1200.jpg"
+                    },
+                    {
+                      "id": "UrlImagen640x516",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__516x640.jpg"
+                    },
+                    {
+                      "id": "UrlImagen546x440",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__440x546.jpg"
+                    },
+                    {
+                      "id": "UrlImagen421x340",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__340x421.jpg"
+                    },
+                    {
+                      "id": "UrlImagen360x290",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__290x360.jpg"
+                    },
+                    {
+                      "id": "UrlImagen260x210",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____2__210x260.jpg"
+                    }
+                  ]
+                },
+                {
+                  "id": "MainFotos",
+                  "type": "GROUPING",
+                  "children": [
+                    {
+                      "id": "UrlImagenT",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__100x100.jpg"
+                    },
+                    {
+                      "id": "UrlImagenX",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__40x40.jpg"
+                    },
+                    {
+                      "id": "UrlImagen324x410",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__324x410.jpg"
+                    },
+                    {
+                      "id": "UrlImagen600x759",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__600x759.jpg"
+                    },
+                    {
+                      "id": "UrlImagen1000x1265",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__1000x1265.jpg"
+                    },
+                    {
+                      "id": "UrlImagen100x127",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__100x127.jpg"
+                    },
+                    {
+                      "id": "UrlImagen50x63",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__50x63.jpg"
+                    },
+                    {
+                      "id": "UrlImagen230x290",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__230x291.jpg"
+                    },
+                    {
+                      "id": "UrlImagen158x200",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__158x200.jpg"
+                    },
+                    {
+                      "id": "UrlImagen1200x967",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__967x1200.jpg"
+                    },
+                    {
+                      "id": "UrlImagen640x516",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__516x640.jpg"
+                    },
+                    {
+                      "id": "UrlImagen546x440",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__440x546.jpg"
+                    },
+                    {
+                      "id": "UrlImagen421x340",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__340x421.jpg"
+                    },
+                    {
+                      "id": "UrlImagen360x290",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__290x360.jpg"
+                    },
+                    {
+                      "id": "UrlImagen260x210",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.es/SGFM/dctm/MEDIA01/201312/05/00102877501110____1__210x260.jpg"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Target",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "BestSellersExcluded",
+              "type": "FLAG",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "id": "Transporte",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "SusceptibleDeEnvolver",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "Voluminoso",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "401",
+              "id_Ext": "347190090",
+              "value": "No voluminoso"
+            },
+            {
+              "id": "InStorePickUp",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "400",
+              "id_Ext": "274969090",
+              "value": "Recogida en tienda"
+            }
+          ]
+        },
+        {
+          "id": "ServiciosDeRetirada",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "ServicioDeRetirada",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1029",
+              "id_Ext": "347191090",
+              "value": "N - No Disponible"
+            }
+          ]
+        },
+        {
+          "id": "ServiciosDePuestaEnMarcha",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "ServicioDePuestaEnMarcha",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1029",
+              "id_Ext": "347191090",
+              "value": "N - No Disponible"
+            },
+            {
+              "id": "ModoDeServicioPuestaEnMarcha",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1030",
+              "id_Ext": "347192090",
+              "value": "N - No Disponible"
+            }
+          ]
+        },
+        {
+          "id": "ServiciosDePuerta",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "ServiciosDePuerta",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1029",
+              "id_Ext": "347191090",
+              "value": "N - No Disponible"
+            },
+            {
+              "id": "ModoDeServiciocambiodePuerta",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1028",
+              "id_Ext": "347193090",
+              "value": "N - No Disponible"
+            }
+          ]
+        },
+        {
+          "id": "Pending",
+          "type": "FLAG",
+          "value": "false"
+        },
+        {
+          "id": "Precios",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "IvaPorcentaje",
+              "type": "STRING",
+              "value": "02"
+            },
+            {
+              "id": "IgicPorcentaje",
+              "type": "STRING",
+              "value": "91"
+            }
+          ]
+        },
+        {
+          "id": "Validar",
+          "type": "FLAG",
+          "value": "true"
+        },
+        {
+          "id": "Carteleria",
+          "type": "FLAG",
+          "value": "false"
+        },
+        {
+          "id": "Reference",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "ReferenceType",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1686",
+              "id_Ext": "346300090",
+              "value": "E"
+            },
+            {
+              "id": "ReferenceSourceOrigin",
+              "type": "STRING",
+              "value": "C"
+            }
+          ]
+        },
+        {
+          "id": "Enviado",
+          "type": "FLAG",
+          "value": "true"
+        },
+        {
+          "id": "x",
+          "type": "STRING",
+          "value": "x"
+        },
+        {
+          "id": "Buscable",
+          "type": "FLAG",
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "link": [
+    {
+      "id_Ext": "2680980013",
+      "hierarchyId": "999",
+      "categoryId": "1390913974"
+    },
+    {
+      "id_Ext": "5500012",
+      "hierarchyId": "998",
+      "categoryId": "00234"
+    },
+    {
+      "id_Ext": "8969018",
+      "hierarchyId": "5001",
+      "categoryId": "01.028.775"
+    },
+    {
+      "id_Ext": "216086020",
+      "hierarchyId": "5003",
+      "categoryId": "1365017182"
+    },
+    {
+      "id_Ext": "53924013",
+      "hierarchyId": "999",
+      "categoryId": "1687"
+    }
+  ],
+  "unlink": [
+
+  ],
+  "specificAttribs": [
+    {
+      "id": "/Complementos_ISS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "DescripcionLarga",
+          "ocurrence": 0,
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "Descripcion",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "es_ES",
+                  "ocurrence": 0,
+                  "type": "STRING",
+                  "value": "Bolso modelo Porti Romboide con asa de hombro y asa larga extraíble con estampado geométrico multicolor. Tiene cartera adicional con cremallera. El cierre es de cremallera."
+                },
+                {
+                  "id": "en_GB",
+                  "ocurrence": 0,
+                  "type": "STRING",
+                  "value": "Porti Romboide multicoloured geometric print handbag with short handle and detachable shoulder strap. Additional wallet with zip. With zip fastening."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CaracteristicasGenerales",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "TipoDeProducto",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1573",
+              "id_Ext": "344779090",
+              "value": "Bolsos"
+            },
+            {
+              "id": "SubtipoDeProducto",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1619",
+              "id_Ext": "348039090",
+              "value": "Asa larga"
+            },
+            {
+              "id": "Genero",
+              "ocurrence": 0,
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1575",
+              "id_Ext": "344721090",
+              "value": "Mujer"
+            },
+            {
+              "id": "JerarquiaNivel3",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1619",
+              "id_Ext": "2682107090",
+              "value": "Bolsos de asa corta"
+            }
+          ]
+        },
+        {
+          "id": "Composicion",
+          "ocurrence": 0,
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "Material",
+              "ocurrence": 0,
+              "type": "GROUPING",
+              "children": [
+                {
+                  "id": "UOM!Porcentaje!Material",
+                  "type": "NUMBER",
+                  "value": "64.0"
+                },
+                {
+                  "id": "UOM!Porcentaje!Unidad",
+                  "type": "LOOKUP_TABLE",
+                  "featureGroupID": "214",
+                  "id_Ext": "344726090",
+                  "value": "%"
+                },
+                {
+                  "id": "TipoDeMaterial",
+                  "type": "LOOKUP_TABLE",
+                  "featureGroupID": "1633",
+                  "id_Ext": "347848090",
+                  "value": "Poliuretano"
+                }
+              ]
+            },
+            {
+              "id": "Material",
+              "ocurrence": 1,
+              "type": "GROUPING",
+              "children": [
+                {
+                  "id": "UOM!Porcentaje!Material",
+                  "type": "NUMBER",
+                  "value": "36.0"
+                },
+                {
+                  "id": "TipoDeMaterial",
+                  "type": "LOOKUP_TABLE",
+                  "featureGroupID": "1633",
+                  "id_Ext": "344749090",
+                  "value": "Poliéster"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Dimensiones",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "UOM!Dimension!Ancho",
+              "type": "NUMBER",
+              "value": "18.5"
+            },
+            {
+              "id": "UOM!Dimension!Alto",
+              "type": "NUMBER",
+              "value": "13.5"
+            },
+            {
+              "id": "UOM!Dimension!Largo",
+              "type": "NUMBER",
+              "value": "32.0"
+            }
+          ]
+        },
+        {
+          "id": "CaracteristicasEspecificas",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "Cierre",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1574",
+              "id_Ext": "475286090",
+              "value": "Solapa"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stores": [
+    {
+      "id": "/Fechas_WWW_ISS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "Fechas",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "FechaDePublicacionWWW",
+              "type": "DATE",
+              "value": "20140206_000000"
+            },
+            {
+              "id": "NovedadWWW",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "PublicarAutomaticamente",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "FechaDePrimeraPublicacionWWW",
+              "type": "DATE",
+              "value": "20131215_000000"
+            },
+            {
+              "id": "NoPublicarAutomaticamente",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "MotivoPubDesWWW",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "10110",
+              "id_Ext": "233767090",
+              "value": "010"
+            },
+            {
+              "id": "ModSP2",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "Foto",
+              "type": "FLAG",
+              "value": "false"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "/UK_ISS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "destacado",
+          "type": "INTEGER",
+          "value": "9999999"
+        },
+        {
+          "id": "MostrarSoloRebajado",
+          "type": "FLAG",
+          "value": "false"
+        },
+        {
+          "id": "FechaDePublicacion",
+          "type": "DATE",
+          "value": "20140206_000000"
+        },
+        {
+          "id": "MotivoPubDesWWW",
+          "type": "LOOKUP_TABLE",
+          "featureGroupID": "10110",
+          "id_Ext": "233767090",
+          "value": "010"
+        },
+        {
+          "id": "NovedadWWW",
+          "type": "FLAG",
+          "value": "false"
+        },
+        {
+          "id": "PublicarAutomaticamente",
+          "type": "FLAG",
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "prices": [
+    {
+      "productId": "001002877501110   ",
+      "centerId": "0090",
+      "regularPrice": "64.00",
+      "catalogPrice": "64.00",
+      "taxPercentage": "02",
+      "igic": "91"
+    },
+    {
+      "productId": "001002877501110   ",
+      "centerId": "0424",
+      "regularPrice": "64.00",
+      "catalogPrice": "64.00",
+      "taxPercentage": "02",
+      "igic": "91"
+    },
+    {
+      "productId": "001002877501110   ",
+      "centerId": "0909",
+      "regularPrice": "63.47",
+      "catalogPrice": "63.47",
+      "taxPercentage": "02",
+      "igic": "91"
+    }
+  ]
+}

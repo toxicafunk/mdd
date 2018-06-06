@@ -1,0 +1,11 @@
+FROM pacohernandezg/postgresql
+
+# File Author / Maintainer
+MAINTAINER Eric Rodriguez
+
+# Copy your fat jar to the container
+COPY decoding-json/decoding_json.so /usr/lib/postgresql/9.6/lib/
+
+EXPOSE 5432
+
+CMD /docker-entrypoint.sh postgres

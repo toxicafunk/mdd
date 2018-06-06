@@ -1,0 +1,7 @@
+{
+	"vertx": {
+		"port": 8004,
+		"server.key.path": "misc/tls/serverkeynew.pem",
+		"server.cert.path": "misc/tls/servercert.pem"
+	}
+}

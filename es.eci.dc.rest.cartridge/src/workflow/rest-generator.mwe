@@ -1,0 +1,258 @@
+<?xml version="1.0"?>
+<workflow>
+	<property name="model" value="es.eci.dc.rest.cartridge/src/Catalog.xmi" />
+	<property name="projectFolder" value="/src/eciprojects"/>
+	<property name="projectName" value="es.eci.catalog.rest"/>
+	
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" >
+		<platformUri value="."/>
+	</bean>
+	
+	<!-- instantiate metamodel -->
+	<bean id="mm_emf" class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/>
+	
+	<!-- load model and store it in slot 'model' -->
+	<component class="org.eclipse.emf.mwe.utils.Reader">
+		<uri value="platform:/resource/${model}" />
+		<modelSlot value="model" />
+	</component>
+	
+    <!-- Clear output directory -->
+	<!--
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner">
+			<directory value="${projectFolder}/${projectName}"/>
+	</component>
+	-->
+	
+	<!-- check model -->
+	<component class="org.eclipse.xtend.check.CheckComponent">
+		<metaModel idRef="mm_emf"/>
+		<checkFile value="metamodel::checks" />
+		<emfAllChildrenSlot value="model" />
+	</component>
+	
+	<!-- Generate static resources - Begin -->
+	<component class="helpers.CopyResources">
+		<projectFolder value="${projectFolder}"/>
+		<projectName value="${projectName}"/>
+		<resourcesFolder value="${projectFolder}/es.eci.dc.rest.cartridge/resources"/>
+	</component>
+	
+	<!--  generate .project -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::project::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!--  generate .classpath -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::classpath::main FOR model" />
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!--  generate model SQL -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::model::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+		
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::misc::sql::postgresql::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!-- generate local config file -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::config::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!-- generate docker config file -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::configdocker::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!-- Copy JOOQ generated resources - Begin -->
+	<component class="helpers.CopyResources">
+		<projectFolder value="${projectFolder}"/>
+		<projectName value="${projectName}/src/main/java"/>
+		<resourcesFolder value="${projectFolder}/es.eci.dc.rest.cartridge/target/generated-sources/jooq"/>
+	</component>
+	
+	<!-- generate pojos -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::pojos::pojos::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!-- generate records -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::pojos::records::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!-- generate pojo converters -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::pojos::beanpojoconverter::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::pojos::pojobeanconverter::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+
+	<!-- generate services -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::services::entity::get::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>		
+		<expand value="template::src::services::entity::patch::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::services::entity::post::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::services::entity::delete::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!-- generate event bus message codecs -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::services::entity::codec::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::services::entity::inversecodec::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!-- generate Main file -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::main::main::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+	<!-- generate Postgresql provider -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand value="template::src::providers::postgresqlprovider::main FOR model" />
+		<globalVarDef name="projectName" value="'${projectName}'"/>
+		<outlet path="${projectFolder}/${projectName}" >
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="utf-8"/>
+		</resourceManager>
+	</component>
+	
+</workflow>

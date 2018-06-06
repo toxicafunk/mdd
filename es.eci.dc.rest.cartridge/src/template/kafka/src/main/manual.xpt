@@ -1,0 +1,38 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FILE "src/main/java/main/KafkaManualConsumer.java"-»
+package main;
+
+import com.hubrick.vertx.kafka.producer.KafkaProducerService;
+import com.hubrick.vertx.kafka.producer.model.KafkaOptions;
+import com.hubrick.vertx.kafka.producer.model.StringKafkaMessage;
+import com.hubrick.vertx.kafka.producer.property.KafkaProducerProperties;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+
+public class KafkaManualProducer {
+	
+	private static final String KAFKA_CONSUMER_ADDRESS = "test.consumer.address";
+
+	public static void main(String[] args) {
+		
+		JsonObject config = new JsonObject();
+		config.put(KafkaProducerProperties.ADDRESS, KAFKA_CONSUMER_ADDRESS);
+		config.put(KafkaProducerProperties.BROKER_LIST, "localhost:9092");
+		config.put(KafkaProducerProperties.DEFAULT_TOPIC, "test");
+		config.put(KafkaProducerProperties.REQUEST_ACKS, "1");
+		
+		final KafkaProducerService kafkaProducerService = KafkaProducerService.createProxy(Vertx.vertx(), "eventbus-address");
+	    kafkaProducerService.sendString(new StringKafkaMessage("your message goes here", "optional-partition"), new KafkaOptions(config).setTopic("test"), response -> {
+	        if (response.succeeded()) {
+	            System.out.println("OK");
+	        } else {
+	            System.out.println("FAILED: " + response.result());
+	        }
+	    });
+	}
+}
+«ENDFILE-»
+«ENDDEFINE-»

@@ -1,0 +1,116 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entityM-»
+		«LET ((Entity) entityM) AS entity»
+		«FILE "src/main/java/services/" + entity.pluralName.toLowerCase() + "/" + entity.pluralName + "Codec.java"-»
+package services.«entity.pluralName.toLowerCase()»;
+
+import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+
+import es.eci.catalog.model.pojos.*;
+
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.eventbus.MessageCodec;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+
+public class «entity.pluralName»Codec implements MessageCodec<JsonObject, «entity.name»> {
+	
+	final Logger logger = LoggerFactory.getLogger(«entity.pluralName»Codec.class);
+	
+	@Override
+	public void encodeToWire(Buffer buffer, JsonObject entity) {
+		String json = entity.encode();
+		buffer.appendInt(json.getBytes().length);
+		buffer.appendString(json);
+	}
+
+	@Override
+	public «entity.name» decodeFromWire(int pos, Buffer buffer) {
+		int _pos = pos;
+		int length = buffer.getInt(_pos);
+		
+		// Get JSON string by it`s length
+		// Jump 4 because getInt() == 4 bytes
+		String json = buffer.getString(_pos += 4, _pos += length);
+		«entity.name» «entity.name.toLowerCase()» = json2Entity(json);
+		logger.info(«entity.name.toLowerCase()»);
+		
+		return «entity.name.toLowerCase()»;
+	}
+	
+	@Override
+	public «entity.name» transform(JsonObject json) {
+		«entity.name» «entity.name.toLowerCase()» = json2Entity(json.encode());
+		logger.info(«entity.name.toLowerCase()»);
+		return «entity.name.toLowerCase()»;
+	}
+	
+	public static «entity.name» json2Entity(String json) {
+		JsonObject contentJson = new JsonObject(json);
+		return json2Entity(contentJson);
+	}
+	
+	public static «entity.name» json2Entity(JsonObject json) {
+	
+		if (json == null || json.isEmpty()) return null;
+		
+		Optional<Integer> idJson = Optional.ofNullable(json.getInteger("id"));
+		
+		«FOREACH getAllAttributes(entity) AS attribute-»
+			«IF attribute.isEntity()-»
+				«IF attribute.cardinality == AttributeCardinality::MANY-»
+		Optional<JsonArray> «attribute.name»Arr = Optional.ofNullable(json.getJsonArray("«attribute.name»"));
+		«attribute.getJavaModelType()» «attribute.name» = new ArrayList<«attribute.entity.name»>();
+		«attribute.name»Arr.orElse(new JsonArray()).forEach(
+			j -> {
+				if (j != null) {
+					«attribute.name».add(services.«attribute.entity.pluralName.toLowerCase()».«attribute.entity.pluralName»Codec.json2Entity((JsonObject) j));
+				}
+			}
+		);
+				«ELSE-»
+		«attribute.getJavaModelType()» «attribute.name» = services.«attribute.entity.pluralName.toLowerCase()».«attribute.entity.pluralName»Codec.json2Entity((JsonObject) json.getValue("«attribute.name»"));
+				«ENDIF-»
+			«ELSE-»
+				«IF attribute.cardinality == AttributeCardinality::MANY-»
+		«attribute.getJavaModelType()» «attribute.name» = («attribute.getJavaModelType()») json.getValue("«attribute.name»");
+				«ELSE-»
+		«attribute.getJavaModelType()» «attribute.name» = json.get«attribute.getJavaModelType()»("«attribute.name»");
+				«ENDIF-»
+			«ENDIF-»
+		«ENDFOREACH-»
+		int id = idJson.orElse(-1);
+		
+		«entity.name» «entity.name.toLowerCase()» = new «entity.name»();
+		«FOREACH getAllAttributes(entity) AS attribute-»
+		«entity.name.toLowerCase()».set«(attribute.name).toFirstUpper()»(«attribute.name»);
+		«ENDFOREACH-»
+		
+		if (id != -1) {
+			«entity.name.toLowerCase()».setId(id);
+		}
+		
+		return «entity.name.toLowerCase()»;
+	}
+
+	@Override
+	public String name() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+
+	@Override
+	public byte systemCodecID() {
+		return -1;
+	}
+
+}
+	«ENDFILE-»
+	«ENDLET-»
+«ENDFOREACH-»
+«ENDDEFINE-»

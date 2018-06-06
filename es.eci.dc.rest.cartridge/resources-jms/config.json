@@ -1,0 +1,6 @@
+{
+    "broker-url": "tcp://localhost:61616",
+    "queue-name": "test-queue",
+    "output-dir": "/tmp/out",
+    "concurrent-consumers": 10
+}

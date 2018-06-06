@@ -1,0 +1,45 @@
+version: "2"
+services:
+  vertxrest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    links:
+      - postgresql
+    environment:
+      JAVA_OPTS: "-Xms384m -Xmx384m"
+    restart: always
+  postgresql:
+    image: esecicatalogrest_postgresql
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile-postgresql
+    ports:
+      - "5432:5432"
+    restart: always
+  vertxjms:
+    #image: vertxjms
+    build:
+      context: ../es.eci.catalog.jms
+      dockerfile: Dockerfile
+    links:
+      - vertxrest
+    restart: always
+  vertxkafka:
+    #image: vertxkafka
+    build:
+      context: ../es.eci.catalog.kafka
+      dockerfile: Dockerfile
+    links:
+      - vertxrest
+    restart: always
+  vertxdecoder:
+    build:
+      context: ../es.eci.catalog.decoder
+      dockerfile: Dockerfile
+    links:
+      - postgresql
+      - vertxrest
+    restart: always

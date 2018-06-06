@@ -1,0 +1,21 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FILE "config-docker.json"-»
+{
+    "postgresql": {
+		"address": {
+			"host": "postgresql",
+			"port": 5432
+		},
+		"enableLogicalDecoding": «enableLogicalDecoding»,
+		"dbname": "«name.toLowerCase()»",
+		"username": "postgres"
+	},
+	
+	"vertx": {
+		"address": "logical.decoder"
+	}
+}
+«ENDFILE-»
+«ENDDEFINE-»

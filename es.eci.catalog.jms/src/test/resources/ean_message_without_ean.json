@@ -1,0 +1,1122 @@
+{
+  "id_Ext": "623597001",
+  "id": "001008452729752 51",
+  "entryContainerID": "1",
+  "movement": "MODIFIED",
+  "coreAttribs": [
+    {
+      "id": "/Product_CPS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "ExternalCode",
+          "type": "STRING",
+          "value": "623597001"
+        },
+        {
+          "id": "RefECI",
+          "type": "STRING",
+          "value": "001008452729752 51"
+        },
+        {
+          "id": "General",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "CodigoEmpresa",
+              "type": "STRING",
+              "value": "01"
+            },
+            {
+              "id": "DescripcionModeloWeb",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "AUTOMAT5 Bicicleta EXPERT 7.5 ´10 BH"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "AUTOMAT45 Bicicleta EXPERT 7.5 ´10 BH"
+                },
+                {
+                  "id": "pt_PT",
+                  "type": "STRING",
+                  "value": "AUTOMAT5 Bicicleta EXPERT 7.5 ´10 BH"
+                }
+              ]
+            },
+            {
+              "id": "COTRATIE",
+              "type": "STRING",
+              "value": "DEP"
+            },
+            {
+              "id": "UnidadVenta",
+              "type": "STRING",
+              "value": "0001"
+            },
+            {
+              "id": "UnidadSurtidoWeb",
+              "type": "INTEGER",
+              "value": "1"
+            },
+            {
+              "id": "AplicaUnidad",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "SenalEntorno",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "395",
+              "id_Ext": "41855090",
+              "value": "Mercancía general ECI"
+            },
+            {
+              "id": "CodigoModelo",
+              "type": "STRING",
+              "value": "A55K-0"
+            },
+            {
+              "id": "DescripcionModelo",
+              "type": "STRING",
+              "value": "BICICLETA EXPERT 7.5"
+            },
+            {
+              "id": "Perecedero",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "UOM!Garantia!Garantia",
+              "type": "NUMBER",
+              "value": "24.0"
+            },
+            {
+              "id": "UOM!Garantia!Unidad",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "211",
+              "id_Ext": "44430090",
+              "value": "meses"
+            },
+            {
+              "id": "Validated",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "CodigoUnico",
+              "type": "STRING",
+              "value": "001008452729752752"
+            },
+            {
+              "id": "CodigoUnicoPrincipal",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "Royaltis",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "PermiteDevolucion",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "StockInfinito",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "ReferenciaGenerica",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "PeticionPrecioDeVenta",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "ReferenciaDigital",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "AnillosDeCompromiso",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "ReferenciaDeLujo",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "ReferenciaMadre",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VentaSinStock",
+              "type": "FLAG",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "id": "ProveedorMarca",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "MarcaMostradaEnWeb",
+              "type": "RELATIONSHIP",
+              "groupID": "391",
+              "id_Ext": "73779056",
+              "value": "BH"
+            },
+            {
+              "id": "NumeroProveedor",
+              "type": "STRING",
+              "value": "12345678"
+            },
+            {
+              "id": "NombreProveedor",
+              "type": "STRING",
+              "value": "BHBIKES EUROPE, S.L."
+            },
+            {
+              "id": "Fabricante",
+              "type": "STRING",
+              "value": "0412460"
+            },
+            {
+              "id": "DescripcionFabricante",
+              "type": "STRING",
+              "value": "BHBIKES EUROPE, S.L."
+            },
+            {
+              "id": "Marca",
+              "type": "STRING",
+              "value": "B.H."
+            }
+          ]
+        },
+        {
+          "id": "ColoresYTallas",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "DescripcionDelColor",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "135",
+              "id_Ext": "38533090",
+              "value": "Negro"
+            },
+            {
+              "id": "ColorBasico",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "10153",
+              "id_Ext": "618803090",
+              "value": "Negros"
+            },
+            {
+              "id": "Tallas",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "393",
+              "id_Ext": "39514090",
+              "value": "Talla única"
+            },
+            {
+              "id": "TipoTallaje",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "394",
+              "id_Ext": "39555090",
+              "value": "Montaña"
+            },
+            {
+              "id": "Talla1Fabricante",
+              "type": "STRING",
+              "value": "51"
+            }
+          ]
+        },
+        {
+          "id": "Transporte",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "SusceptibleDeEnvolver",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "Voluminoso",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "401",
+              "id_Ext": "44231090",
+              "value": "Supervoluminoso"
+            },
+            {
+              "id": "InStorePickUp",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "400",
+              "id_Ext": "44228090",
+              "value": "No recogida en tienda"
+            }
+          ]
+        },
+        {
+          "id": "DescripcionCorta",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "DescripcionTicket",
+              "type": "STRING",
+              "value": "MATERIAL DEPO"
+            }
+          ]
+        },
+        {
+          "id": "GestionComprasStock",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "Calificacion1",
+              "type": "STRING",
+              "value": "PR"
+            },
+            {
+              "id": "Calificacion2",
+              "type": "STRING",
+              "value": "V"
+            },
+            {
+              "id": "Calificacion3",
+              "type": "STRING",
+              "value": "7T"
+            },
+            {
+              "id": "Calificacion4",
+              "type": "STRING",
+              "value": "B"
+            },
+            {
+              "id": "Calificacion5",
+              "type": "STRING",
+              "value": "AL"
+            },
+            {
+              "id": "TipoDeGestion",
+              "type": "STRING",
+              "value": "06"
+            }
+          ]
+        },
+        {
+          "id": "DimensionesYPeso",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "UOM!Dimensiones!Unidad",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "204",
+              "id_Ext": "44343090",
+              "value": "cm"
+            },
+            {
+              "id": "UOM!PesoBruto!Unidad",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "206",
+              "id_Ext": "44356090",
+              "value": "g"
+            },
+            {
+              "id": "UOM!VolumenContenidoNeto!Unidad",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "213",
+              "id_Ext": "44491090",
+              "value": "ml"
+            }
+          ]
+        },
+        {
+          "id": "Variantes",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "CodigoVarianteWeb",
+              "type": "STRING",
+              "value": "A1416673"
+            },
+            {
+              "id": "VariantesTallas",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VariosColores",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "VariantesModelos",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VariosTamanos",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VariosFormatos",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "VariosTipoPiel",
+              "type": "FLAG",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "id": "Fechas",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "FechaDeAltaCompras",
+              "type": "DATE",
+              "value": "20090901_000000"
+            },
+            {
+              "id": "FechaDeAltaPrecatalogo",
+              "type": "DATE",
+              "value": "20100812_040031"
+            },
+            {
+              "id": "FechaDeAltaCatalogo",
+              "type": "DATE",
+              "value": "20100823_133316"
+            },
+            {
+              "id": "FechaDisponibilidadLanzamientoAlMercado",
+              "type": "DATE",
+              "value": "20130205_155635"
+            }
+          ]
+        },
+        {
+          "id": "Multimedia",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "Fotos",
+              "type": "GROUPING",
+              "children": [
+                {
+                  "id": "MainFotos",
+                  "type": "GROUPING",
+                  "children": [
+                    {
+                      "id": "UrlImagenX",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.pre/SGFM/dctm/MEDIA01/201302/12/00108452729752_51_1__40x40.jpg"
+                    },
+                    {
+                      "id": "UrlImagen1200x1200",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.pre/SGFM/dctm/MEDIA01/201302/12/00108452729752_51_1__1200x1200"
+                    },
+                    {
+                      "id": "UrlImagen640x640",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.pre/SGFM/dctm/MEDIA01/201302/12/00108452729752_51_1__640x640"
+                    },
+                    {
+                      "id": "UrlImagen440x440",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.pre/SGFM/dctm/MEDIA01/201302/12/00108452729752_51_1__440x440"
+                    },
+                    {
+                      "id": "UrlImagen210x210",
+                      "type": "IMAGE_URL",
+                      "value": "http:sgfm.elcorteingles.pre/SGFM/dctm/MEDIA01/201302/12/00108452729752_51_1__210x210"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Target",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "BestSellersExcluded",
+              "type": "FLAG",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "id": "ServiciosDeRetirada",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "ServicioDeRetirada",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1029",
+              "id_Ext": "39708090",
+              "value": "N - No Disponible"
+            }
+          ]
+        },
+        {
+          "id": "ServiciosDePuestaEnMarcha",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "ServicioDePuestaEnMarcha",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1029",
+              "id_Ext": "39708090",
+              "value": "N - No Disponible"
+            },
+            {
+              "id": "ModoDeServicioPuestaEnMarcha",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1030",
+              "id_Ext": "41191090",
+              "value": "N - No Disponible"
+            }
+          ]
+        },
+        {
+          "id": "ServiciosDePuerta",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "ServiciosDePuerta",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1029",
+              "id_Ext": "39708090",
+              "value": "N - No Disponible"
+            },
+            {
+              "id": "ModoDeServiciocambiodePuerta",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1028",
+              "id_Ext": "41186090",
+              "value": "N - No Disponible"
+            }
+          ]
+        },
+        {
+          "id": "Pending",
+          "type": "FLAG",
+          "value": "false"
+        },
+        {
+          "id": "Precios",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "IvaPorcentaje",
+              "type": "STRING",
+              "value": "01"
+            },
+            {
+              "id": "IgicPorcentaje",
+              "type": "STRING",
+              "value": "01"
+            }
+          ]
+        },
+        {
+          "id": "Validar",
+          "type": "FLAG",
+          "value": "true"
+        },
+        {
+          "id": "Enviado",
+          "type": "FLAG",
+          "value": "true"
+        },
+        {
+          "id": "Template",
+          "type": "LOOKUP_TABLE",
+          "featureGroupID": "2024",
+          "id_Ext": "54584090",
+          "value": "Template - Product"
+        },
+        {
+          "id": "x",
+          "type": "STRING",
+          "value": "x"
+        },
+        {
+          "id": "Buscable",
+          "type": "FLAG",
+          "value": "true"
+        },
+        {
+          "id": "CanalesVenta",
+          "ocurrence": 0,
+          "type": "LOOKUP_TABLE",
+          "featureGroupID": "10154",
+          "id_Ext": "38349090",
+          "value": "LTC"
+        }
+      ]
+    }
+  ],
+  "link": [
+    {
+      "id_Ext": "697801016",
+      "hierarchyId": "2013",
+      "categoryId": "1369293884"
+    },
+    {
+      "id_Ext": "419433012",
+      "hierarchyId": "998",
+      "categoryId": "00191"
+    },
+    {
+      "id_Ext": "421061013",
+      "hierarchyId": "999",
+      "categoryId": "1452"
+    },
+    {
+      "id_Ext": "587956018",
+      "hierarchyId": "5001",
+      "categoryId": "01.084.527"
+    }
+  ],
+  "unlink": [
+
+  ],
+  "specificAttribs": [
+    {
+      "id": "/Bicicletas_ISS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "CaracteristicasGenerales",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "DescripcionDeProducto",
+              "ocurrence": 0,
+              "type": "GROUPING",
+              "children": [
+                {
+                  "id": "TituloDeProducto",
+                  "type": "STRING",
+                  "children": [
+                    {
+                      "id": "es_ES",
+                      "type": "STRING",
+                      "value": "Otras características"
+                    }
+                  ]
+                },
+                {
+                  "id": "DescripcionDeProducto",
+                  "type": "STRING",
+                  "children": [
+                    {
+                      "id": "en_US",
+                      "ocurrence": 0,
+                      "type": "STRING",
+                      "value": "Cassette: shimanoTOURNEY"
+                    },
+                    {
+                      "id": "en_US",
+                      "ocurrence": 1,
+                      "type": "STRING",
+                      "value": "Direccion: FSA CF40 1.5"
+                    },
+                    {
+                      "id": "es_ES",
+                      "ocurrence": 0,
+                      "type": "STRING",
+                      "value": "Cassette: shimanoTOURNEY"
+                    },
+                    {
+                      "id": "es_ES",
+                      "ocurrence": 1,
+                      "type": "STRING",
+                      "value": "Dirección: FSA CF40 1.5"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "TipoBicicleta",
+              "ocurrence": 0,
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1558",
+              "id_Ext": "31945090",
+              "value": "Montaña"
+            },
+            {
+              "id": "Suspension",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "1557",
+              "id_Ext": "31937090",
+              "value": "Delantera"
+            },
+            {
+              "id": "Cadena",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "KMC"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "KMC"
+                }
+              ]
+            },
+            {
+              "id": "Cuadro",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "EXPERT AIR-LIGHT"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "EXPERT AIR-LIGHT"
+                }
+              ]
+            },
+            {
+              "id": "Cubiertas",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "CONTINENTAL EXPLORER 2.1"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "CONTINENTAL EXPLORER 2.1"
+                }
+              ]
+            },
+            {
+              "id": "CambioPosterior",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "SHIMANO ACERA"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "SHIMANO ACERA"
+                }
+              ]
+            },
+            {
+              "id": "Desviador",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "SHIMANO Ultegra Gloosy"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "SHIMANO Ultegra Gloosy"
+                }
+              ]
+            },
+            {
+              "id": "Frenos",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "SHIMANO M486 160"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "SHIMANO M486 160"
+                }
+              ]
+            },
+            {
+              "id": "Horquilla",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "Suntour RAIDON RLD 100mm"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "Suntour RAIDON RLD 100mm"
+                }
+              ]
+            },
+            {
+              "id": "Llantas",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "Aluminio DP / SHIMANO M475"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "Aluminio DP / SHIMANO M475"
+                }
+              ]
+            },
+            {
+              "id": "ManetaCambio",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "Deore"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "Deore"
+                }
+              ]
+            },
+            {
+              "id": "ManetaFrenos",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "SHIMANO M486 160"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "SHIMANO M486 160"
+                }
+              ]
+            },
+            {
+              "id": "Manillar",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "BH Logo"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "BH Logo"
+                }
+              ]
+            },
+            {
+              "id": "Neumaticos",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "RUBENA SHIELD, BH 1 DENSIDAD"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "RUBENA SHIELD, BH 1 DENSIDAD"
+                }
+              ]
+            },
+            {
+              "id": "Pedalier",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "SR SUNTOUR XR"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "SR SUNTOUR XR"
+                }
+              ]
+            },
+            {
+              "id": "UOM!Peso!Medida",
+              "type": "NUMBER",
+              "value": "13.0"
+            },
+            {
+              "id": "UOM!Peso!Unidad",
+              "type": "LOOKUP_TABLE",
+              "featureGroupID": "206",
+              "id_Ext": "44359090",
+              "value": "kg"
+            },
+            {
+              "id": "Platos",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "FSA ALPHA DRIVE"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "FSA ALPHA DRIVE"
+                }
+              ]
+            },
+            {
+              "id": "Potencia",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "TITAN LITE"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "TITAN LITE"
+                }
+              ]
+            },
+            {
+              "id": "Punos",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "Titan bloqueable"
+                }
+              ]
+            },
+            {
+              "id": "Sillin",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "Prologo Nago Evo"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "Prologo Nago Evo"
+                }
+              ]
+            },
+            {
+              "id": "Tija",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "BH Logo"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "BH Logo"
+                }
+              ]
+            },
+            {
+              "id": "Velocidades",
+              "type": "INTEGER",
+              "value": "21"
+            },
+            {
+              "id": "Accesorios",
+              "type": "STRING",
+              "children": [
+                {
+                  "id": "en_US",
+                  "type": "STRING",
+                  "value": "Luz"
+                },
+                {
+                  "id": "es_ES",
+                  "type": "STRING",
+                  "value": "Luz"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stores": [
+    {
+      "id": "/Fechas_WWW_ISS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "Fechas",
+          "type": "GROUPING",
+          "children": [
+            {
+              "id": "FechaDePublicacionWWW",
+              "type": "DATE",
+              "value": "20130201_164752"
+            },
+            {
+              "id": "NovedadWWW",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "PublicarAutomaticamente",
+              "type": "FLAG",
+              "value": "true"
+            },
+            {
+              "id": "FechaDePrimeraPublicacionWWW",
+              "type": "DATE",
+              "value": "20130401_000000"
+            },
+            {
+              "id": "NoPublicarAutomaticamente",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "ModSP2",
+              "type": "FLAG",
+              "value": "false"
+            },
+            {
+              "id": "Foto",
+              "type": "FLAG",
+              "value": "false"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "/Comunes_ISS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "destacado",
+          "type": "INTEGER",
+          "value": "9999999"
+        },
+        {
+          "id": "MostrarSoloRebajado",
+          "type": "FLAG",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "id": "/LTC_ISS",
+      "type": "SPEC",
+      "children": [
+        {
+          "id": "Fecha de Publicacion",
+          "type": "DATE",
+          "value": "20120101_000000"
+        },
+        {
+          "id": "FechaDePrimeraPublicacionWWW",
+          "type": "DATE",
+          "value": "20130402_000000"
+        },
+        {
+          "id": "NovedadWWW",
+          "type": "FLAG",
+          "value": "false"
+        },
+        {
+          "id": "PublicarAutomaticamente",
+          "type": "FLAG",
+          "value": "true"
+        },
+        {
+          "id": "Foto",
+          "type": "FLAG",
+          "value": "false"
+        }
+      ]
+    }
+  ],
+  "prices": [
+    {
+      "productId": "001008452729752 51",
+      "centerId": "0090",
+      "regularPrice": "799.00",
+      "catalogPrice": "799.00",
+      "taxPercentage": "01",
+      "igic": "01"
+    },
+    {
+      "productId": "001008452729752 51",
+      "centerId": "0424",
+      "regularPrice": "799.00",
+      "catalogPrice": "799.00",
+      "taxPercentage": "01",
+      "igic": "01"
+    },
+    {
+      "productId": "001008452729752 51",
+      "centerId": "0909",
+      "regularPrice": "792.40",
+      "catalogPrice": "792.40",
+      "taxPercentage": "01",
+      "igic": "01"
+    }
+  ]
+}
+

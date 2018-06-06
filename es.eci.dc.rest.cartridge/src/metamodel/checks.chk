@@ -1,0 +1,46 @@
+import dc;
+extension helpers::functions;
+
+context Domain ERROR "No entities defined" :
+	attributeSets.size > 0;
+
+context Entity ERROR "Tab's name and i18nLabel are required if more than one tab are defined": 
+	formTabs.size < 2 || (formTabs.name.select(e|e != null && e != "").size == formTabs.size && (formTabs.i18nLabel.select(e|e != null && e != "").size == formTabs.size));
+
+context Entity ERROR "If there are groups defined, all of the attributes must have an associated form group":
+	((Collection[AttributeSet]) getAllAttributes(this).eContainer).formTabs.name.toSet().size == 0
+			|| getAllAttributes(this).size == getAllAttributes(this).formGroup.select(e|e != null).size;
+
+context Domain ERROR "Attribute set name must be unique":
+	attributeSets.name.toSet().size == attributeSets.size;
+
+context AttributeSet ERROR "Attribute set name must start in upper case": 
+	name.subString(0, 1).toUpperCase() == name.subString(0, 1);
+	
+context Entity ERROR "Entity plural name must start in upper case": 
+	pluralName.subString(0, 1).toUpperCase() == pluralName.subString(0, 1);
+
+context Attribute ERROR "Attribute type not supported": 
+	this.type == AttributeType::STRING && this.cardinality == AttributeCardinality::ONE && !this.enableI18N
+	|| this.type == AttributeType::STRING && this.cardinality == AttributeCardinality::MANY && !this.enableI18N
+	|| this.type == AttributeType::STRING && this.cardinality == AttributeCardinality::ONE && this.enableI18N
+	|| this.type == AttributeType::STRING && this.cardinality == AttributeCardinality::ONE && !this.enableI18N
+	|| this.type == AttributeType::DATE && this.cardinality == AttributeCardinality::ONE
+	|| this.type == AttributeType::NUMBER && this.cardinality == AttributeCardinality::ONE
+	|| this.type == AttributeType::BOOLEAN && this.cardinality == AttributeCardinality::ONE
+	|| this.type == AttributeType::RICH_TEXT && this.cardinality == AttributeCardinality::ONE && !this.enableI18N
+	|| this.type == AttributeType::RICH_TEXT && this.cardinality == AttributeCardinality::ONE && this.enableI18N
+	|| this.type == AttributeType::ENTITY && this.cardinality == AttributeCardinality::ONE && !this.containment
+	|| this.type == AttributeType::ENTITY && this.cardinality == AttributeCardinality::MANY && !this.containment
+	|| this.type == AttributeType::ENTITY && this.cardinality == AttributeCardinality::MANY && this.containment
+	|| this.type == AttributeType::TIMESTAMP && this.cardinality == AttributeCardinality::ONE
+	|| this.type == AttributeType::PASSWORD && this.cardinality == AttributeCardinality::ONE
+	|| this.type == AttributeType::IMAGE && this.cardinality == AttributeCardinality::ONE
+	|| this.type == AttributeType::IMAGE && this.cardinality == AttributeCardinality::MANY
+	|| this.type == AttributeType::VIDEO && this.cardinality == AttributeCardinality::ONE;
+
+context Attribute ERROR "Attribute name must start in lower case":
+	name.subString(0, 1).toLowerCase() == name.subString(0, 1);
+
+context Attribute ERROR "Attribute marked as label must also be listable and sortable":
+	!label || list && sortable;

@@ -1,0 +1,953 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage 
+		xmi:version="2.0" 
+		xmlns:xmi="http://www.omg.org/XMI" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+		name="MarketplaceCatalog" 
+		nsURI="http://www.mdmdm.org/marketplacecatalog" 
+		nsPrefix="marketplacecatalog">
+	<eClassifiers xsi:type="ecore:EClass" name="Map" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="key"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="value"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="idExt"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="hierarchyId"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="categoryId"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="GlossaryValue" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="code"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="term"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="normalizedTerm"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="externalCode"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="description"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Brand" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="name"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="code"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="atgCode"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="description"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="displayBrand"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Category" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="code"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="atgCode"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="parentCategory"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Category"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="status"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="descriptions"
+				lowerBound="0"
+				upperBound="-1"
+				eType="#//Map"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="fullDescriptions"
+				lowerBound="0"
+				upperBound="-1"
+				eType="#//Map"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="startDate"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="endDate"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="invalidationDate"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="reference"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Link"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="noveltyDays"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="children"
+				lowerBound="0"
+				upperBound="-1"
+				eType="#//Category"/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Image" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="url"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="description"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Video" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="title"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="description"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="url"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="ProductType" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="code"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="atgCode"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="descriptions"
+				lowerBound="0"
+				upperBound="-1"
+				eType="#//Map"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="parents"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="isMarketplace"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="categoryListCode"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="categoryListLabel"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="categoryCodes"
+				lowerBound="0"
+				upperBound="-1"
+				eType="#//Category"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="importId"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Item" eSuperTypes="#//Service #//Product ">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="ean"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="providerRef"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="startDate"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="name"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="description"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="tags"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="extendedDescription"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="weight"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="weightUnit"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="photos"
+				lowerBound="0"
+				upperBound="-1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="supplementaryItems"
+				lowerBound="0"
+				upperBound="-1"
+				eType="#//Item"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="soldSeparately"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="productId"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="productType"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="regulations"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="securityInfo"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="category"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Category"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="keywords"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="image"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="secondaryImages"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="videos"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="subType"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="style"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="washingInstructions"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="GenderTarget" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="code"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="label"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Targets" eSuperTypes="#//Target ">
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="RelatedItem" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="items"
+				lowerBound="0"
+				upperBound="-1"
+				eType="#//Item"/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Supplier" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="code"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="name"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="SupplierItem" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="supplier"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Supplier"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="item"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Item"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="price"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="stock"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="activeFrom"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="activeTo"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Glossary" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="values"
+				lowerBound="0"
+				upperBound="-1"
+				eType="#//GlossaryValue"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="reference"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Link"/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Lkup" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="code"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="name"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="lookupType"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="descriptions"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Map"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="atgCode"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="externalCode"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="logo"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="audit"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="priority"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="glossary"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Glossary"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="reference"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Link"/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Ean" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="code"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="eciRef"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="eciRefList"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="webVariantCode"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="internalProviderCode"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="referenceType"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="productTypeId"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="parentCategories"
+				lowerBound="0"
+				upperBound="-1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="lastDate"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="unpublishDate"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Service" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="serviceDate"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="serviceComments"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Product" eSuperTypes="#//ProductVariant ">
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="brand"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Brand"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="defaultCategories"
+				lowerBound="0"
+				upperBound="-1"
+				eType="#//Category"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="additionalInformation"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="ProductVariant" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EReference" 
+				name="mainProduct"
+				lowerBound="0"
+				upperBound="1"
+				eType="#//Item"/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="color"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="color1"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="color2"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="size"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Target" eSuperTypes="">
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="gender"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="ageFrom"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="ageUntil"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="ageUnit"
+				lowerBound="0"
+				upperBound="1"
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"				
+					
+				/>
+		<eStructuralFeatures 
+				xsi:type="ecore:EAttribute" 
+				name="recomendedAge"
+				lowerBound="0"
+				upperBound="1"
+					
+				eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"				
+					
+				/>
+	</eClassifiers>
+</ecore:EPackage>

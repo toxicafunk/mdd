@@ -1,0 +1,84 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+«FILE "src/main/scala/graphql/Data.scala"-»
+package graphql
+
+import argonaut.Argonaut
+import argonaut.Argonaut.CanBuildFromDecodeJson
+import argonaut.Argonaut.OptionDecodeJson
+import argonaut.Argonaut.OptionEncodeJson
+import argonaut.Argonaut.StringDecodeJson
+import argonaut.Argonaut.StringEncodeJson
+import argonaut.Argonaut.StringToParseWrap
+import argonaut.Argonaut.StringToStringWrap
+import argonaut.Argonaut.TraversableOnceEncodeJson
+import argonaut.Argonaut.jEmptyObject
+import argonaut.CodecJson
+import argonaut.DecodeJson
+import argonaut.EncodeJson
+
+«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entityM-»
+	«LET ((Entity) entityM) AS entity»
+case class «entity.name» (
+	id: Int
+	«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+		«IF attribute.entity.name == entity.name-»
+			«IF attribute.cardinality == AttributeCardinality::MANY-»
+	, «attribute.name»: List[Int]
+			«ELSE-»
+	, «attribute.name»: Int
+			«ENDIF-»
+		«ELSE-»
+	, «attribute.name»: «attribute.getScalaModelType()»
+		«ENDIF-»
+	«ENDFOREACH-»
+)
+
+	«IF entity.name == "Category" || entity.name == "Item"-»
+object «entity.name» {
+  implicit def AttribDecodeJson: DecodeJson[«entity.name»] =
+    DecodeJson(c => for {
+      id <- (c --\ "id").as[Integer]
+      	«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+      		«IF attribute.entity.name == entity.name-»
+				«IF attribute.cardinality == AttributeCardinality::MANY-»
+		«attribute.name» <- (c --\ "«attribute.name»").as[List[Int]]
+				«ELSE-»
+		«attribute.name» <- (c --\ "«attribute.name»").as[Int]
+				«ENDIF-»
+			«ELSE-»
+		«attribute.name» <- (c --\ "«attribute.name»").as[«attribute.getScalaModelType()»]
+			«ENDIF-»
+    	«ENDFOREACH-»
+    } yield «entity.name»(
+    	id
+    	«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+		, «attribute.name»
+    	«ENDFOREACH-»
+    	)
+    )
+
+  implicit def «entity.name»EncodeJson: EncodeJson[«entity.name»] =
+    EncodeJson( (att: «entity.name») =>
+      ("id" := att.id) ->:
+      	«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+    	("«attribute.name»" := att.«attribute.name») ->:
+    	«ENDFOREACH-»
+    jEmptyObject)
+}
+	«ELSE-»
+object «entity.name» {
+  implicit def «entity.name»CodecJson: CodecJson[«entity.name» ] =
+    Argonaut.casecodec«getAllAttributes((Entity) entity).size + 1»(«entity.name» .apply, «entity.name» .unapply)(
+    	"id"
+    	«FOREACH getAllAttributes((Entity) entity) AS attribute-»
+    	,"«attribute.name»"
+    	«ENDFOREACH-»
+    )
+}
+	«ENDIF-»
+	«ENDLET-»
+«ENDFOREACH-»
+«ENDFILE-»
+«ENDDEFINE-»

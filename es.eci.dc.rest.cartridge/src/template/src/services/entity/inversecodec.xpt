@@ -1,0 +1,90 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entityM-»
+		«LET ((Entity) entityM) AS entity»
+		«FILE "src/main/java/services/" + entity.pluralName.toLowerCase() + "/" + entity.pluralName + "InverseCodec.java"-»
+package services.«entity.pluralName.toLowerCase()»;
+
+import java.util.Arrays;
+
+import es.eci.catalog.model.pojos.«entity.name»;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.eventbus.MessageCodec;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+
+public class «entity.pluralName»InverseCodec implements MessageCodec<«entity.name», JsonObject> {
+	
+	final Logger logger = LoggerFactory.getLogger(«entity.pluralName»InverseCodec.class);
+
+	@Override
+	public void encodeToWire(Buffer buffer, «entity.name» entity) {
+		JsonObject jsonToEncode = entity2JsonObject(entity);
+		String json = jsonToEncode.encode();
+		
+		logger.info("encoding: " + json);
+		
+		buffer.appendInt(json.getBytes().length);
+		buffer.appendString(json);
+	}
+
+	@Override
+	public JsonObject decodeFromWire(int pos, Buffer buffer) {
+		int _pos = pos;
+		int length = buffer.getInt(_pos);
+		
+		// Get JSON string by it`s length
+		// Jump 4 because getInt() == 4 bytes
+		String json = buffer.getString(_pos += 4, _pos += length);
+		JsonObject contentJson = new JsonObject(json);		
+		logger.debug("decoding: " + contentJson);
+		
+		return contentJson;
+	}
+
+	@Override
+	public JsonObject transform(«entity.name» entity) {
+		return entity2JsonObject(entity);
+	}
+	
+	public static JsonObject entity2JsonObject(«entity.name» entity) {
+	
+		if (entity == null) return null;
+	
+		JsonObject jsonToEncode = new JsonObject();
+		
+		«FOREACH getAllAttributes(entity) AS attribute-»
+			«IF attribute.isEntity()-»
+				«IF attribute.cardinality == AttributeCardinality::MANY-»
+		jsonToEncode.put("«attribute.name»", entity.get«(attribute.name).toFirstUpper()»());		
+				«ELSE-»
+		jsonToEncode.put("«attribute.name»", services.«attribute.entity.pluralName.toLowerCase()».«attribute.entity.pluralName»InverseCodec.entity2JsonObject(entity.get«(attribute.name).toFirstUpper()»()));
+				«ENDIF-»
+			«ELSE-»
+		jsonToEncode.put("«attribute.name»", entity.get«(attribute.name).toFirstUpper()»());
+			«ENDIF-»
+		«ENDFOREACH-»	
+		jsonToEncode.put("id", entity.getId());
+		
+		
+		return jsonToEncode;
+	}
+
+	@Override
+	public String name() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+
+	@Override
+	public byte systemCodecID() {
+		return -1;
+	}
+
+}
+	«ENDFILE-»
+	«ENDLET-»
+«ENDFOREACH-»
+«ENDDEFINE-»

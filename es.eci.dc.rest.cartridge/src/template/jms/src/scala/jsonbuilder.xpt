@@ -1,0 +1,156 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FILE "src/main/scala/com/mindcurv/argonaut/JsonWPCBuilder.scala"-»
+
+package com.mindcurv.argonaut
+
+import JsonWPCMessage._
+import scalaz._
+import scalaz.Scalaz._
+import scalaz.Kleisli._
+import es.eci.catalog.model.pojos._
+import java.sql.Timestamp
+import java.util.Calendar
+import java.text.SimpleDateFormat
+import monocle.function.Curry.curry
+import es.eci.catalog.model.pojos.Brand
+import scala.collection.JavaConversions._
+
+object JsonWPCBuilder {
+  
+  val formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSZZ")
+  
+  implicit class AttribUtils(val attrib: Attrib) {
+    def asString: String = attrib.value match { 
+      case Some(s) => s.toString 
+      case _ => ""
+    }
+    
+    def asBoolean: Boolean = attrib.asString.toBoolean
+    
+    def asFloat: Float = attrib.asString.toFloat
+    
+    def asMap: es.eci.catalog.model.pojos.Map = attrib.children match {
+      case Some(children) => {
+        val maps = new Map()
+        children.foreach { c => maps.setKey(c.id); maps.setValue(c.asString) } 
+        maps
+      }
+      case None => new Map()
+    }
+    
+    def asArray: Array[Integer] = attrib.children match {
+      case Some(children) => children.map { c => Integer.decode(c.asString) }.toArray
+      case None => Array.empty
+    }
+    
+    def asListMap: List[es.eci.catalog.model.pojos.Map] = attrib.children match {
+      case Some(children) => children.map { 
+          c => new Map(null, c.id, c.asString)
+      }
+      case None => Nil
+    }
+  }
+  
+  implicit class LinkUtils(val links: List[Link]) {
+    def asArray: Array[String] =
+      if (links.isEmpty) Array.empty
+      else links.map { l => s"${l.hierarchyId}.${l.id_Ext}" }.toArray
+    
+    
+    def asString: String =
+      if (links.isEmpty) ""
+      else links(0).categoryId
+  }
+  
+  def findAttribute(key: String): List[Attrib] => Option[Attrib] = (children: List[Attrib]) => children match {
+      case h :: t if h.id == key => Some(h)
+      case h :: t => h.children match {
+        case Some(c) => findAttribute(key)(c) orElse findAttribute(key)(t)
+        case None => findAttribute(key)(t)
+      }
+      case _ => None
+    }
+  
+  def findAttributeFromCore(key: String): CoreAttribs => Option[Attrib] = (xs: CoreAttribs) =>
+    findAttribute(key)(xs.children)
+  
+  def findCoreAttribById(coreAttribs: List[CoreAttribs]): String => Option[CoreAttribs] = 
+     (id: String) => {
+      coreAttribs.filter { cAttr => cAttr.id == id } match {
+        case h :: t => Some(h)
+        case _ => None
+      }
+  }
+  
+  def getAttrFromLink(links: Option[List[Link]])(id: String): Option[List[Link]] = links match {
+    case Some(attribs) => Option(attribs.filter { l => l.hierarchyId == id })
+    case _ => None
+  }
+  
+  def getAttrK(id: String)(coreAttribs: List[CoreAttribs]): String => Option[Attrib] =  (key: String) => {
+    val k = kleisli(findAttributeFromCore(key)) composeK findCoreAttribById(coreAttribs)
+    k(id)
+  }
+     
+  def getAttr(id: String)(coreAttribs: List[CoreAttribs]): String => Option[Attrib] = (key: String) => for {
+    coreAttrib <- findCoreAttribById(coreAttribs)(id)
+    attr <- findAttributeFromCore(key)(coreAttrib)
+  } yield attr
+  
+  «FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entityM-»
+  «LET ((Entity) entityM) AS entity-»
+  «IF entity.wpcCoreAttrib != null-»
+  def construct«entity.name»(jsonMessage: JsonWPCMessage): es.eci.catalog.model.pojos.«entity.name» = {
+  	
+    val getAttrFromCore = getAttrK("«entity.wpcCoreAttrib»")(jsonMessage.coreAttribs)
+    
+    val «entity.name.toFirstLower()» = (
+    	-1.some
+    «FOREACH getAllAttributes((Entity) entity) AS attribute-»
+      «IF attribute.wpcMapping != null-»
+      	«IF attribute.wpcMapping.startsWith('99')-»
+      		«IF attribute.cardinality == AttributeCardinality::MANY-»
+    	|@| getAttrFromLink(jsonMessage.link)("«attribute.wpcMapping»")
+      		«ELSE-»
+    	|@| getAttrFromLink(jsonMessage.link)("«attribute.wpcMapping»")
+      		«ENDIF-»
+      	«ELSE-»
+    	|@| getAttrFromCore("«attribute.wpcMapping»")
+      	«ENDIF-»
+      «ENDIF-»
+	«ENDFOREACH-»
+    ) {(
+    	id: Int
+    «FOREACH getAllAttributes((Entity) entity) AS attribute-»
+      «IF attribute.wpcMapping != null-»
+      ,	«attribute.name»
+      «ENDIF-»
+	«ENDFOREACH-»
+    ) => new es.eci.catalog.model.pojos.«entity.name»(
+      null
+    «FOREACH getAllAttributes((Entity) entity) AS attribute-»
+      «IF attribute.wpcMapping != null-»
+      	«IF attribute.isEntity() == false && attribute.cardinality == AttributeCardinality::MANY-»
+      , «attribute.name».asArray
+      	«ELSE-»
+      , «attribute.name».as«attribute.getJavaModelType().alphaOnly()»
+      	«ENDIF-»
+      «ELSE-»
+      , null
+      «ENDIF-»
+	«ENDFOREACH-»
+     )
+    }
+     
+    println(«entity.name.toFirstLower()»)
+    «entity.name.toFirstLower()».get
+  }
+  
+  «ENDIF-»
+  «ENDLET-»
+  «ENDFOREACH-»
+}
+«ENDFILE-»
+«ENDDEFINE-»

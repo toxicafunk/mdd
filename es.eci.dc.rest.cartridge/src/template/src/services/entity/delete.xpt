@@ -1,0 +1,46 @@
+«IMPORT dc»
+«EXTENSION helpers::functions-»
+«DEFINE main FOR Domain»
+	«FOREACH attributeSets.select(e | e.metaType == dc::Entity && ((Entity) e).independent) AS entity-»
+		«FILE "src/main/java/services/" + ((Entity) entity).pluralName.toLowerCase() + "/Delete.java"-»
+package services.«((Entity) entity).pluralName.toLowerCase()»;
+
+import static es.eci.catalog.model.Tables.«underscored(((Entity) entity).pluralName).toUpperCase()»;
+
+import javax.transaction.NotSupportedException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
+
+import org.jooq.DSLContext;
+
+import es.eci.catalog.model.tables.records.«((Entity) entity).pluralName»Record;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+import services.ECIServiceVerticle;
+
+public class Delete extends ECIServiceVerticle {
+	final Logger logger = LoggerFactory.getLogger(Get.class);
+	
+	protected void executeService(UserTransaction ut, DSLContext create, Message<Object> message)
+			throws NotSupportedException, SystemException {
+		JsonObject request = (JsonObject) message.body();
+		JsonObject parameters = request.getJsonObject("parameters");
+		
+		String idParameter = parameters.getString("id");
+		
+		«((Entity) entity).pluralName.toFirstUpper()»Record entityRecord = create.fetchOne(«underscored(((Entity) entity).pluralName).toUpperCase()», «underscored(((Entity) entity).pluralName).toUpperCase()»._ID.eq(Integer.valueOf(idParameter)));
+		int numberCreated = entityRecord.delete();
+		
+		if (numberCreated > 0) {
+			message.reply(new JsonObject());
+		} else {
+			message.reply(new JsonObject("{\"errors\": [\"Error al insertar record\"]}"));
+		}
+	}
+			
+}
+«ENDFILE-»
+	«ENDFOREACH-»
+«ENDDEFINE-»

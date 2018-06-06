@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dc" nsURI="http://www.elcorteingles.es/dc" nsPrefix="dc">
+  <eClassifiers xsi:type="ecore:EClass" name="Domain">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="author" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Paco Hernández"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionalGroups" upperBound="-1"
+        eType="#//FunctionalGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeSets" upperBound="-1"
+        eType="#//AttributeSet" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="1.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nSearchLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Buscar"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nAdvancedSearchLabel"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="Búsqueda avanzada"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nBulkUpdates" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Cambios masivos"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nDataImport" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Importación de datos"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nAttributeSetsLabel"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="Grupos de atributos"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nNewLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Añadir"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nEditLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Editar"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nDeleteLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Eliminar"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nHomeLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Inicio"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nOkLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Aceptar"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nCancelLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Cancelar"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nCloneLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Clonar"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nImportLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Importar..."/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nNextPage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Página siguiente"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nPreviousPage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Página anterior"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="supportedLanguages" lowerBound="1"
+        upperBound="-1" eType="#//Language"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialDataLoads" upperBound="-1"
+        eType="#//InitialDataLoad" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableLogicalDecoding"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" lowerBound="1"
+        eType="#//AttributeType" defaultValueLiteral="STRING"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formGroup" eType="#//FormGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="list" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sortable" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entity" unique="false"
+        eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containment" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="treeAttribute" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinality" unique="false"
+        lowerBound="1" eType="#//AttributeCardinality" defaultValueLiteral="ONE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filteredBy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cols" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="5"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowGetByDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowPostByDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowPutByDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
+        defaultValueLiteral="100"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minLength" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxLength" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        defaultValueLiteral="100"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventStart" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventEnd" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableI18N" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nLabel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableBulkUpdate" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableUniqueBoxSearch"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableAdvancedSearch" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wpcMapping" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AttributeType">
+    <eLiterals name="STRING"/>
+    <eLiterals name="DATE" value="1"/>
+    <eLiterals name="NUMBER" value="2"/>
+    <eLiterals name="BOOLEAN" value="3"/>
+    <eLiterals name="RICH_TEXT" value="5"/>
+    <eLiterals name="ENTITY" value="6"/>
+    <eLiterals name="TIMESTAMP" value="8"/>
+    <eLiterals name="PASSWORD" value="9"/>
+    <eLiterals name="ENTITY_LIST" value="11"/>
+    <eLiterals name="ROLE_LIST" value="12"/>
+    <eLiterals name="DOCUMENT" value="13"/>
+    <eLiterals name="IMAGE" value="14"/>
+    <eLiterals name="VIDEO" value="15"/>
+    <eLiterals name="SOUND" value="16"/>
+    <eLiterals name="GEO_POINT" value="20"/>
+    <eLiterals name="GENDER" value="21" literal="GENDER"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AttributeCardinality">
+    <eLiterals name="ONE"/>
+    <eLiterals name="MANY" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nLabel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeSets" upperBound="-1"
+        eType="#//AttributeSet"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formTabs" upperBound="-1"
+        eType="#//FormTab" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormTab">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formGroups" lowerBound="1"
+        upperBound="-1" eType="#//FormGroup" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nLabel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//AttributeSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pluralName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionalGroup" lowerBound="1"
+        eType="#//FunctionalGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="onlyOneRecord" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indexes" upperBound="-1"
+        eType="#//Index" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowGetByDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowPostByDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowPutByDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowDeleteByDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="independent" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableExcelImporter" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wpcCoreAttrib" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Index">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" lowerBound="1"
+        upperBound="-1" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i18nLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Language">
+    <eLiterals name="af" literal="Afrikaans"/>
+    <eLiterals name="am" value="1" literal="Amharic"/>
+    <eLiterals name="bg" value="2" literal="Bulgarian"/>
+    <eLiterals name="ca" value="3" literal="Catalan"/>
+    <eLiterals name="zh_HK" value="4" literal="Chinese (Hong Kong)"/>
+    <eLiterals name="zh_CN" value="5" literal="Chinese (PRC)"/>
+    <eLiterals name="zh_TW" value="6" literal="Chinese (Taiwan)"/>
+    <eLiterals name="hr" value="7" literal="Croatian"/>
+    <eLiterals name="cs" value="8" literal="Czech"/>
+    <eLiterals name="da" value="9" literal="Danish"/>
+    <eLiterals name="nl" value="10" literal="Dutch"/>
+    <eLiterals name="en_AU" value="11" literal="English (AU)"/>
+    <eLiterals name="en_GB" value="12" literal="English (UK)"/>
+    <eLiterals name="en_US" value="13" literal="English (US)"/>
+    <eLiterals name="et" value="14" literal="Estonian"/>
+    <eLiterals name="fil" value="15" literal="Filipino"/>
+    <eLiterals name="fi" value="16" literal="Finnish"/>
+    <eLiterals name="fr_CA" value="17" literal="French (Canada)"/>
+    <eLiterals name="fr_FR" value="18" literal="French (France)"/>
+    <eLiterals name="de" value="19" literal="German"/>
+    <eLiterals name="el" value="20" literal="Greek"/>
+    <eLiterals name="hi" value="21" literal="Hindi"/>
+    <eLiterals name="hu" value="22" literal="Hungarian"/>
+    <eLiterals name="id" value="23" literal="Indonesian"/>
+    <eLiterals name="it" value="24" literal="Italian"/>
+    <eLiterals name="ja" value="25" literal="Japanese"/>
+    <eLiterals name="ko" value="26" literal="Korean"/>
+    <eLiterals name="lv" value="27" literal="Latvian"/>
+    <eLiterals name="lt" value="28" literal="Lithuanian"/>
+    <eLiterals name="ms" value="29" literal="Malay"/>
+    <eLiterals name="no" value="30" literal="Norwegian"/>
+    <eLiterals name="pl" value="31" literal="Polish"/>
+    <eLiterals name="pt_BR" value="32" literal="Portuguese (Brazil)"/>
+    <eLiterals name="pt_PT" value="33" literal="Portuguese (Portugal)"/>
+    <eLiterals name="ro" value="34" literal="Romanian"/>
+    <eLiterals name="ru" value="35" literal="Russian"/>
+    <eLiterals name="sr" value="36" literal="Serbian"/>
+    <eLiterals name="sk" value="37" literal="Slovak"/>
+    <eLiterals name="sl" value="38" literal="Slovenian"/>
+    <eLiterals name="es_419" value="39" literal="Spanish (Latin America)"/>
+    <eLiterals name="es_ES" value="40" literal="Spanish (Spain)"/>
+    <eLiterals name="sw" value="41" literal="Swahili"/>
+    <eLiterals name="sv" value="42" literal="Swedish"/>
+    <eLiterals name="th" value="43" literal="Thai"/>
+    <eLiterals name="tr" value="44" literal="Turkish"/>
+    <eLiterals name="uk" value="45" literal="Ukrainian"/>
+    <eLiterals name="zu" value="46" literal="Zulu"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialDataLoad">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entity" lowerBound="1"
+        eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeSets" upperBound="-1"
+        eType="#//AttributeSet"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributes" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

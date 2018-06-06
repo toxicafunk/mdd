@@ -1,0 +1,135 @@
+import dc;
+extension org::eclipse::xtend::util::stdlib::uid;
+
+String generateUID(Entity e): uid(e);
+
+String tabs(int count): (count == 0 ? "" : "\t" + tabs(count - 1));
+
+String spaces(int count): (count == 0 ? "" : "  " + spaces(count - 1));
+
+String hyphenated(String word): word.toFirstLower().replaceAll("([A-Z])", "-$1").toLowerCase();
+String unhyphenated(String word): (word == "" ? "" : (word.subString(0, 1) == "-" ? word.subString(1, 2).toUpperCase() + unhyphenated(word.subString(2, word.length)): word.subString(0, 1) + unhyphenated(word.subString(1, word.length))));
+
+String underscored(String word): word.toFirstLower().replaceAll("([A-Z])", "_$1").toLowerCase();
+String ununderscored(String word): (word == "" ? "" : (word.subString(0, 1) == "_" ? word.subString(1, 2).toUpperCase() + ununderscored(word.subString(2, word.length)): word.subString(0, 1) + ununderscored(word.subString(1, word.length))));
+
+String alphaOnly(String word): word.replaceAll("[^\\w*]", "");
+
+// Devuelve los atributos de una entidad y todos los atributos de los grupos de atributos relacionados (recursivamente)
+Collection[Attribute] getAllAttributes(AttributeSet attributeSet):
+		{}.addAll(attributeSet.attributes).addAll(attributeSet.attributeSets.collect(e | getAllAttributes(e)).flatten());
+
+Set[AttributeSet] getAllAttributeSets(AttributeSet attributeSet):
+		{}.addAll(attributeSet.attributeSets).addAll(attributeSet.attributeSets.getAllAttributeSets().flatten()).toSet();
+
+String getGroupName(Attribute attribute): 
+		(attribute.formGroup != null ? 
+			attribute.formGroup.name : 
+			(((AttributeSet) attribute.eContainer).formTabs.size > 0 ? 
+				((AttributeSet) attribute.eContainer).formTabs.get(0).formGroups.get(0).name :
+				((AttributeSet) attribute.eContainer).name
+			)
+		);
+
+String getGroupI18nLabel(Attribute attribute): 
+		(attribute.formGroup != null ? 
+			attribute.formGroup.i18nLabel : 
+			(((AttributeSet) attribute.eContainer).formTabs.size > 0 ? 
+				((AttributeSet) attribute.eContainer).formTabs.get(0).formGroups.get(0).i18nLabel :
+				((AttributeSet) attribute.eContainer).i18nLabel
+			)
+		);
+
+FormGroup getGroup(Attribute attribute):
+		let fg = new FormGroup : 
+			fg.setI18nLabel(getGroupI18nLabel(attribute)) -> 
+			fg.setName(getGroupName(attribute)) -> 
+			fg;
+
+String getTabName(Attribute attribute): 
+		(attribute.formGroup != null ? 
+			((FormTab) attribute.formGroup.eContainer).name :
+			(((AttributeSet) attribute.eContainer).formTabs.size == 0 ?
+				null :
+				((AttributeSet) attribute.eContainer).formTabs.get(0).name
+			) 
+		);
+
+String getTabI18nLabel(Attribute attribute): 
+		(attribute.formGroup != null ? 
+			((FormTab) attribute.formGroup.eContainer).i18nLabel :
+			(((AttributeSet) attribute.eContainer).formTabs.size == 0 ?
+				null :
+				((AttributeSet) attribute.eContainer).formTabs.get(0).i18nLabel
+			) 
+		);
+		
+FormTab getTab(Attribute attribute):
+		let fg = new FormTab : 
+			fg.setI18nLabel(getTabI18nLabel(attribute)) -> 
+			fg.setName(getTabName(attribute)) -> 
+			fg;
+
+String getTabI18nLabel(AttributeSet attributeSet, String tabName):
+			(getAllAttributes(attributeSet).getTab().select(e|e.name == tabName).size > 0 ?
+				getAllAttributes(attributeSet).getTab().select(e|e.name == tabName).get(0).i18nLabel :
+				null
+			);
+			
+String getGroupI18nLabel(AttributeSet attributeSet, String groupName):
+			(getAllAttributes(attributeSet).getGroup().select(e|e.name == groupName).size > 0 ? 
+				getAllAttributes(attributeSet).getGroup().select(e|e.name == groupName).get(0).i18nLabel :
+				null
+			);
+			
+String getJavaType(Attribute attribute):
+	switch (attribute.type) {
+		case AttributeType::BOOLEAN: "boolean"
+		case AttributeType::ENTITY: (attribute.cardinality == AttributeCardinality::MANY? "Integer[]" : "Integer")
+		case AttributeType::IMAGE: (attribute.cardinality == AttributeCardinality::MANY? "String[]" : "String")
+		case AttributeType::NUMBER: "float"
+		default : (attribute.cardinality == AttributeCardinality::MANY? "String[]" : "String")
+	};
+
+String getJavaModelType(Attribute attribute):
+	switch (attribute.type) {
+		case AttributeType::BOOLEAN: "Boolean"
+		case AttributeType::ENTITY: (attribute.cardinality == AttributeCardinality::MANY? "List<" + attribute.entity.name +">" : attribute.entity.name)
+		case AttributeType::IMAGE: (attribute.cardinality == AttributeCardinality::MANY? "String[]" : "String")
+		case AttributeType::NUMBER: "Float"
+		default : (attribute.cardinality == AttributeCardinality::MANY? "String[]" : "String")
+	};
+
+String getScalaModelType(Attribute attribute):
+	switch (attribute.type) {
+		case AttributeType::BOOLEAN: "Boolean"
+		case AttributeType::ENTITY: (attribute.cardinality == AttributeCardinality::MANY? "List[" + attribute.entity.name +"]" : attribute.entity.name)
+		case AttributeType::IMAGE: (attribute.cardinality == AttributeCardinality::MANY? "List[String]" : "String")
+		case AttributeType::NUMBER: "Double"
+		default : (attribute.cardinality == AttributeCardinality::MANY? "List[String]" : "String")
+	};
+	
+String getSangriaModelType(Attribute attribute):
+	switch (attribute.type) {
+		case AttributeType::BOOLEAN: "BooleanType"
+		case AttributeType::ENTITY: (attribute.cardinality == AttributeCardinality::MANY? "ListType(" + attribute.entity.name +"Type)" : attribute.entity.name + "Type")
+		case AttributeType::IMAGE: (attribute.cardinality == AttributeCardinality::MANY? "ListType(StringType)" : "StringType")
+		case AttributeType::NUMBER: "FloatType"
+		default : (attribute.cardinality == AttributeCardinality::MANY? "ListType(StringType)" : "StringType")
+	};
+	
+Boolean isEntity(Attribute attribute):
+	switch (attribute.type) {
+		case AttributeType::ENTITY: true
+		default: false
+	};
+	
+String getDefaultValue(Attribute attribute):
+	(attribute.defaultValue != null ?
+		attribute.defaultValue :
+		switch (attribute.type) {
+			case AttributeType::BOOLEAN: "false"
+			default : "null"
+		}
+	);
+	

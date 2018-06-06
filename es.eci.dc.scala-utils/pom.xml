@@ -1,0 +1,143 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>es.eci.dc</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <groupId>es.eci.dc</groupId>
+  <artifactId>scala-utils</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  
+  <dependencies>
+		<!-- POM Padre para que funcione el reactor de IC -->
+		<dependency>
+			<groupId>es.eci.dc</groupId>
+			<artifactId>parent</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+		
+		<!-- Scala -->
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.scala-lang.modules</groupId>
+		  <artifactId>scala-parser-combinators_2.11</artifactId>
+		  <version>1.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>io.argonaut</groupId>
+			<artifactId>argonaut_2.11</artifactId>
+		</dependency>
+
+        <dependency>
+            <groupId>org.scalacheck</groupId>
+            <artifactId>scalacheck_2.11</artifactId>
+            <version>1.13.5</version>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.scalatest/scalatest_2.11 -->
+		<dependency>
+    		<groupId>org.scalatest</groupId>
+    		<artifactId>scalatest_2.11</artifactId>
+    		<version>2.2.2</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+    		<groupId>junit</groupId>
+    		<artifactId>junit</artifactId>
+    		<version>4.12</version>
+    		<scope>test</scope>
+		</dependency>
+		
+        
+  </dependencies>
+  
+  <build>
+		<sourceDirectory>src/main/scala</sourceDirectory>
+		<testSourceDirectory>src/test/scala</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<recompileMode>incremental</recompileMode>
+					<scalaVersion>${scala.version}</scalaVersion>
+					<args>
+						<arg>-deprecation</arg>
+						<arg>-explaintypes</arg>
+						<arg>-encoding</arg>
+						<arg>${project.build.sourceEncoding}</arg>
+						<arg>-target:jvm-${maven.compiler.target}</arg>
+						<arg>-feature</arg>
+						<arg>-unchecked</arg>
+						<arg>-Xfatal-warnings</arg>
+						<arg>-Xlint</arg>
+						<arg>-Yno-adapted-args</arg>
+						<arg>-Ywarn-numeric-widen</arg>
+						<arg>-Ywarn-value-discard</arg>
+						<arg>-Xfuture</arg>
+					</args>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											net.alchim31.maven
+										</groupId>
+										<artifactId>
+											scala-maven-plugin
+										</artifactId>
+										<versionRange>
+											[3.2.2,)
+										</versionRange>
+										<goals>
+											<goal>testCompile</goal>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+  </build>
+</project>

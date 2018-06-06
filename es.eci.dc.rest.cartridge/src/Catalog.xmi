@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dc:Domain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://www.elcorteingles.es/dc" xsi:schemaLocation="http://www.elcorteingles.es/dc metamodel/dc.ecore" name="MarketplaceCatalog" author="El Corte Inglés" version="1.0.0" i18nLabel="Catálogo comercial">
+  <functionalGroups name="Products" icon="maps:local-mall" i18nLabel="Ítems"/>
+  <functionalGroups name="Suppliers" icon="places:business-center" i18nLabel="Proveedores"/>
+  <functionalGroups name="Settings" icon="lock" i18nLabel="Usuarios"/>
+  <functionalGroups name="Fashion" i18nLabel="Moda"/>
+  <functionalGroups name="Lookups" i18nLabel="Lookups"/>
+  <attributeSets xsi:type="dc:Entity" name="Map" i18nLabel="Mapa" pluralName="Maps" functionalGroup="//@functionalGroups.4">
+    <attributes name="key" i18nLabel="Clave"/>
+    <attributes name="value" i18nLabel="Valor"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Link" i18nLabel="Referencia" pluralName="Links" functionalGroup="//@functionalGroups.4">
+    <attributes name="idExt" i18nLabel="Id externo"/>
+    <attributes name="hierarchyId" i18nLabel="Id jerarquia"/>
+    <attributes name="categoryId" i18nLabel="Id categoría"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="GlossaryValue" i18nLabel="Valor de glosario" pluralName="GlossaryValues" functionalGroup="//@functionalGroups.4">
+    <attributes name="code" i18nLabel="Código"/>
+    <attributes name="term" i18nLabel="Término"/>
+    <attributes name="normalizedTerm" i18nLabel="Termino normalizado"/>
+    <attributes name="externalCode" i18nLabel="Código externo"/>
+    <attributes name="description" type="RICH_TEXT" i18nLabel="Descripción"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Brand" i18nLabel="Marcas" pluralName="Brands" functionalGroup="//@functionalGroups.2" allowGetByDefault="true" allowPostByDefault="true" allowPutByDefault="true" allowDeleteByDefault="true" enableExcelImporter="true" wpcCoreAttrib="/Marcas_CPS">
+    <attributes name="name" label="true" list="true" sortable="true" i18nLabel="Nombre" enableBulkUpdate="true" enableUniqueBoxSearch="true" enableAdvancedSearch="true"/>
+    <attributes name="code" i18nLabel="Código" wpcMapping="Code"/>
+    <attributes name="atgCode" i18nLabel="Código ATG" wpcMapping="CodeATG"/>
+    <attributes name="description" type="RICH_TEXT" i18nLabel="Descripción" wpcMapping="Description"/>
+    <attributes name="displayBrand" type="BOOLEAN" i18nLabel="Mostrar Marca" wpcMapping="DisplayMarca"/>
+    <indexes name="Name" attributes="//@attributeSets.3/@attributes.0" unique="true"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Category" i18nLabel="Categorías" comments="The product Category" pluralName="Categories" functionalGroup="//@functionalGroups.0" allowGetByDefault="true" allowPostByDefault="true" allowPutByDefault="true" allowDeleteByDefault="true" wpcCoreAttrib="/Product_HPS">
+    <attributes name="code" maxLength="5" i18nLabel="Código" wpcMapping="Key"/>
+    <attributes name="atgCode" i18nLabel="Código" wpcMapping="KeyATG"/>
+    <attributes name="parentCategory" type="ENTITY" entity="//@attributeSets.4" treeAttribute="true" i18nLabel="Categoría padre" enableAdvancedSearch="true"/>
+    <attributes name="status" i18nLabel="Estatus" wpcMapping="Unpublish"/>
+    <attributes name="descriptions" type="ENTITY" entity="//@attributeSets.0" cardinality="MANY" i18nLabel="Descripciones" wpcMapping="Description"/>
+    <attributes name="fullDescriptions" type="ENTITY" entity="//@attributeSets.0" cardinality="MANY" i18nLabel="Descripciones completas"/>
+    <attributes name="startDate" type="DATE" i18nLabel="Fecha inicio" wpcMapping="StartDate"/>
+    <attributes name="endDate" type="DATE" i18nLabel="Fecha fin" wpcMapping="FinishDate"/>
+    <attributes name="invalidationDate" type="DATE" i18nLabel="Fecha invalidación"/>
+    <attributes name="reference" type="ENTITY" entity="//@attributeSets.1" i18nLabel="Referencia"/>
+    <attributes name="noveltyDays" type="NUMBER" i18nLabel="Días de novedad" wpcMapping="DiasNovedad"/>
+    <attributes name="children" type="ENTITY" entity="//@attributeSets.4" cardinality="MANY" i18nLabel="Categorias hijas"/>
+    <indexes name="Code" attributes="//@attributeSets.4/@attributes.0" unique="true"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Image" i18nLabel="Imagen" pluralName="Images" functionalGroup="//@functionalGroups.0">
+    <attributes name="url" type="IMAGE" i18nLabel="Imagén"/>
+    <attributes name="description" type="RICH_TEXT" filteredBy="true" i18nLabel="Descripción"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Video" i18nLabel="Video" pluralName="Videos" functionalGroup="//@functionalGroups.0">
+    <attributes name="title" i18nLabel="Titulo"/>
+    <attributes name="description" type="RICH_TEXT" i18nLabel="Descripción"/>
+    <attributes name="url" type="VIDEO" i18nLabel="Video"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="ProductType" i18nLabel="Tipo de Producto" pluralName="ProductTypes" functionalGroup="//@functionalGroups.0" wpcCoreAttrib="/ProductType_HPS">
+    <attributes name="code" maxLength="5" i18nLabel="Código" wpcMapping="Key"/>
+    <attributes name="atgCode" maxLength="5" i18nLabel="Código ATG" wpcMapping="KeyATG"/>
+    <attributes name="descriptions" type="ENTITY" entity="//@attributeSets.0" cardinality="MANY" i18nLabel="Descripciones" wpcMapping="Description"/>
+    <attributes name="parents" cardinality="MANY" i18nLabel="Padres"/>
+    <attributes name="isMarketplace" type="BOOLEAN" defaultValue="false" i18nLabel="Pertenece a marketplace?"/>
+    <attributes name="categoryListCode" i18nLabel="Código de jeraquía de ventas"/>
+    <attributes name="categoryListLabel" i18nLabel="Etiqueta de jerarquía de ventas"/>
+    <attributes name="categoryCodes" type="ENTITY" entity="//@attributeSets.4" cardinality="MANY" i18nLabel="Jerarquía de ventas"/>
+    <attributes name="importId" i18nLabel="Id importación"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Item" i18nLabel="Ítems" attributeSets="//@attributeSets.17 //@attributeSets.18" comments="Ítems facturables al cliente. Ejemplos de ítems pueden ser los productos, los servicios, ..." pluralName="Items" functionalGroup="//@functionalGroups.0" allowGetByDefault="true" allowPostByDefault="true" allowPutByDefault="true" allowDeleteByDefault="true" enableExcelImporter="true">
+    <attributes name="ean" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.0" cols="3" maxLength="13" i18nLabel="Referencia única (EAN, GTIN, ...)" comments="" enableUniqueBoxSearch="true" enableAdvancedSearch="true"/>
+    <attributes name="providerRef" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.0" cols="3" maxLength="10" i18nLabel="Referencia Proveedor" enableUniqueBoxSearch="true" enableAdvancedSearch="true"/>
+    <attributes name="startDate" type="DATE" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.0" cols="4" maxLength="20" i18nLabel="Fecha de alta en catálogo" enableUniqueBoxSearch="true" enableAdvancedSearch="true"/>
+    <attributes name="name" label="true" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" list="true" sortable="true" cols="10" maxLength="200" i18nLabel="Nombre del ítem" enableUniqueBoxSearch="true" enableAdvancedSearch="true"/>
+    <attributes name="description" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" cols="10" maxLength="5000" enableI18N="true" i18nLabel="Descripción del ítem" enableUniqueBoxSearch="true"/>
+    <attributes name="tags" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" cardinality="MANY" i18nLabel="Etiquetas" enableBulkUpdate="true" enableAdvancedSearch="true"/>
+    <attributes name="extendedDescription" type="RICH_TEXT" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" cols="10" maxLength="5000" i18nLabel="Descripción extendida"/>
+    <attributes name="weight" type="NUMBER" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" i18nLabel="Peso"/>
+    <attributes name="weightUnit" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" i18nLabel="Peso (unidad de medida)"/>
+    <attributes name="photos" type="IMAGE" formGroup="//@attributeSets.8/@formTabs.1/@formGroups.0" cardinality="MANY" cols="10" i18nLabel="Fotos"/>
+    <attributes name="supplementaryItems" type="ENTITY" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" entity="//@attributeSets.8" cardinality="MANY" cols="10" i18nLabel="Ítems adicionales"/>
+    <attributes name="soldSeparately" type="BOOLEAN" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" defaultValue="true" i18nLabel="Se vende por separado" comments="It indicates if this item is sold separately or must be acquired as an additional optional item when another item is bought."/>
+    <attributes name="productId" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.2" maxLength="20" pattern="MP_." i18nLabel="Id de Producto"/>
+    <attributes name="productType" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.0" list="true" sortable="true" entity="//@attributeSets.7" cardinality="MANY" i18nLabel="Tipo de Producto"/>
+    <attributes name="regulations" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" list="true" cardinality="MANY" maxLength="3000" i18nLabel="Regulación Aplicable"/>
+    <attributes name="securityInfo" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" list="true" cardinality="MANY" maxLength="3000" i18nLabel="Información de Seguridad"/>
+    <attributes name="category" type="ENTITY" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.0" entity="//@attributeSets.4" i18nLabel="Categoría"/>
+    <attributes name="keywords" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.0" list="true" cardinality="MANY" i18nLabel="Palabras clave (SEO)"/>
+    <attributes name="image" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" entity="//@attributeSets.5" i18nLabel="Imagen principal"/>
+    <attributes name="secondaryImages" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" list="true" entity="//@attributeSets.5" cardinality="MANY" i18nLabel="Imagenes Secundarias"/>
+    <attributes name="videos" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" entity="//@attributeSets.6" cardinality="MANY" i18nLabel="Videos"/>
+    <attributes name="subType" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" i18nLabel="Subtipo"/>
+    <attributes name="style" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" i18nLabel="Estilo"/>
+    <attributes name="washingInstructions" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" i18nLabel="Instrucciones de lavado"/>
+    <formTabs name="product" i18nLabel="Producto">
+      <formGroups name="codification" i18nLabel="Codificación"/>
+      <formGroups name="specifications" i18nLabel="Especificaciones"/>
+      <formGroups name="packs" i18nLabel="Packs"/>
+    </formTabs>
+    <formTabs name="multimedia" i18nLabel="Multimedia">
+      <formGroups name="multimedia" i18nLabel="Multimedia"/>
+    </formTabs>
+    <indexes name="Id" attributes="//@attributeSets.8/@attributes.12" unique="true"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="GenderTarget" i18nLabel="Género de Target" pluralName="GenderTargets" functionalGroup="//@functionalGroups.3">
+    <attributes name="code" i18nLabel="Código"/>
+    <attributes name="label" i18nLabel="Etiqueta"/>
+  </attributeSets>
+  <attributeSets name="Targets" i18nLabel="Targets" attributeSets="//@attributeSets.20"/>
+  <attributeSets xsi:type="dc:Entity" name="RelatedItem" i18nLabel="Ítems relacionados" pluralName="RelatedItems" functionalGroup="//@functionalGroups.3" icon="">
+    <attributes name="items" type="ENTITY" label="true" list="true" sortable="true" entity="//@attributeSets.8" cardinality="MANY" i18nLabel="Ítems" enableUniqueBoxSearch="true" enableAdvancedSearch="true"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Supplier" i18nLabel="Proveedores" pluralName="Suppliers" functionalGroup="//@functionalGroups.1" allowGetByDefault="true" allowPostByDefault="true" allowPutByDefault="true" allowDeleteByDefault="true">
+    <attributes name="code" maxLength="20" i18nLabel="Referencia ECI" enableAdvancedSearch="true"/>
+    <attributes name="name" label="true" list="true" sortable="true" maxLength="200" i18nLabel="Nombre" enableUniqueBoxSearch="true" enableAdvancedSearch="true"/>
+    <indexes name="Name" attributes="//@attributeSets.12/@attributes.1" unique="true"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="SupplierItem" i18nLabel="Ofertas de productos" pluralName="SupplierItems" functionalGroup="//@functionalGroups.1" allowGetByDefault="true" allowPostByDefault="true" allowPutByDefault="true" allowDeleteByDefault="true">
+    <attributes name="supplier" type="ENTITY" label="true" list="true" sortable="true" entity="//@attributeSets.12" i18nLabel="Proveedor"/>
+    <attributes name="item" type="ENTITY" label="true" list="true" sortable="true" entity="//@attributeSets.8" i18nLabel="Producto"/>
+    <attributes name="price" type="NUMBER" label="true" list="true" sortable="true" maxValue="9999999.0" stepSize="0.01" maxLength="10" i18nLabel="Precio"/>
+    <attributes name="stock" type="NUMBER" list="true" maxValue="999999.0" maxLength="6" i18nLabel="Stock (existencias)"/>
+    <attributes name="activeFrom" type="DATE" i18nLabel="Fecha de inicio"/>
+    <attributes name="activeTo" type="DATE" i18nLabel="Fecha de fin"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Glossary" i18nLabel="Glosario" pluralName="Glossaries" functionalGroup="//@functionalGroups.4">
+    <attributes name="values" type="ENTITY" entity="//@attributeSets.2" cardinality="MANY" i18nLabel="Valores"/>
+    <attributes name="reference" type="ENTITY" entity="//@attributeSets.1" i18nLabel="Referencia"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Lkup" i18nLabel="Lookups" pluralName="Lkups" functionalGroup="//@functionalGroups.4">
+    <attributes name="code" i18nLabel="Código"/>
+    <attributes name="name" i18nLabel="Nombre"/>
+    <attributes name="lookupType" i18nLabel="Tipo lookup"/>
+    <attributes name="descriptions" type="ENTITY" entity="//@attributeSets.0" i18nLabel="Descripción"/>
+    <attributes name="atgCode" i18nLabel="Código ATG"/>
+    <attributes name="externalCode" i18nLabel="Código externo"/>
+    <attributes name="logo" i18nLabel="Logo"/>
+    <attributes name="audit" i18nLabel="Auditoría"/>
+    <attributes name="priority" i18nLabel="Orden"/>
+    <attributes name="glossary" type="ENTITY" entity="//@attributeSets.14" i18nLabel="Glosario"/>
+    <attributes name="reference" type="ENTITY" entity="//@attributeSets.1" i18nLabel="Referencia"/>
+  </attributeSets>
+  <attributeSets xsi:type="dc:Entity" name="Ean" i18nLabel="Eans" pluralName="Eans" functionalGroup="//@functionalGroups.4" wpcCoreAttrib="/Product_CPS">
+    <attributes name="code" i18nLabel="Código EAN" wpcMapping="EanGtin"/>
+    <attributes name="eciRef" i18nLabel="Referencia ECI" wpcMapping="RefECI"/>
+    <attributes name="eciRefList" list="true" cardinality="MANY" i18nLabel="Lista de referencias ECI"/>
+    <attributes name="webVariantCode" i18nLabel="Código variante web" wpcMapping="CodigoVarianteWeb"/>
+    <attributes name="internalProviderCode" i18nLabel="Código proveedor interno" wpcMapping="NumeroProveedor"/>
+    <attributes name="referenceType" i18nLabel="Tipo referencia" wpcMapping="TipoReferencia"/>
+    <attributes name="productTypeId" i18nLabel="Id Tipo Producto" wpcMapping="998"/>
+    <attributes name="parentCategories" cardinality="MANY" i18nLabel="Categorías padre" wpcMapping="999"/>
+    <attributes name="lastDate" type="DATE" i18nLabel="Última fecha"/>
+    <attributes name="unpublishDate" type="DATE" i18nLabel="Fecha despublicación" wpcMapping="FechaDespublicacionWWW"/>
+  </attributeSets>
+  <attributeSets name="Service" i18nLabel="Servicios">
+    <attributes name="serviceDate" type="DATE" formGroup="//@attributeSets.17/@formTabs.0/@formGroups.0" maxLength="5000" i18nLabel="Fecha del servicio"/>
+    <attributes name="serviceComments" type="RICH_TEXT" formGroup="//@attributeSets.17/@formTabs.0/@formGroups.0" cols="10" i18nLabel="Observaciones del servicio"/>
+    <formTabs name="service" i18nLabel="Servicio">
+      <formGroups name="service" i18nLabel="Servicio"/>
+    </formTabs>
+  </attributeSets>
+  <attributeSets name="Product" i18nLabel="Productos" attributeSets="//@attributeSets.19">
+    <attributes name="brand" type="ENTITY" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.0" entity="//@attributeSets.3" i18nLabel="Marca"/>
+    <attributes name="defaultCategories" type="ENTITY" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" entity="//@attributeSets.4" cardinality="MANY" cols="10" i18nLabel="Categorías"/>
+    <attributes name="additionalInformation" type="RICH_TEXT" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" cols="10" maxLength="5000" i18nLabel="Información adicional"/>
+  </attributeSets>
+  <attributeSets name="ProductVariant" i18nLabel="Variantes de productos">
+    <attributes name="mainProduct" type="ENTITY" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" entity="//@attributeSets.8" i18nLabel="Producto"/>
+    <attributes name="color" label="true" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" list="true" sortable="true" maxLength="200" i18nLabel="Color"/>
+    <attributes name="color1" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" maxLength="200" i18nLabel="Color"/>
+    <attributes name="color2" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" maxLength="200" i18nLabel="Color"/>
+    <attributes name="size" label="true" formGroup="//@attributeSets.8/@formTabs.0/@formGroups.1" list="true" sortable="true" i18nLabel="Talla"/>
+  </attributeSets>
+  <attributeSets name="Target" i18nLabel="Objetivo">
+    <attributes name="gender" entity="//@attributeSets.9" maxLength="1" i18nLabel="Género"/>
+    <attributes name="ageFrom" type="NUMBER" maxLength="2" i18nLabel="Edad Desde"/>
+    <attributes name="ageUntil" type="NUMBER" list="true" maxLength="2" i18nLabel="Edad Hasta"/>
+    <attributes name="ageUnit" i18nLabel="Unidad (edad)"/>
+    <attributes name="recomendedAge" type="NUMBER" maxLength="2" i18nLabel="Edad recomendada"/>
+  </attributeSets>
+  <supportedLanguages>Spanish (Spain)</supportedLanguages>
+  <supportedLanguages>English (US)</supportedLanguages>
+  <supportedLanguages>French (France)</supportedLanguages>
+  <supportedLanguages>German</supportedLanguages>
+  <initialDataLoads entity="//@attributeSets.12" attributes="name">
+    <values>Supplier 1</values>
+    <values>Supplier 2</values>
+    <values>Supplier 3</values>
+  </initialDataLoads>
+  <initialDataLoads entity="//@attributeSets.8" attributeSets="//@attributeSets.18" attributes="name;description;washingInstructions;brand">
+    <values>Gabardina de mujer Roberto Verino con cuello solapa y manga francesa;Gabardina con cuello de solapa, manga francesa con trabilla ajustable y cinturón;No lavar a máquina, no planchar;name|Roberto Verino</values>
+  </initialDataLoads>
+  <initialDataLoads entity="//@attributeSets.8" attributeSets="//@attributeSets.18 //@attributeSets.17" attributes="ean;productId;startDate;name;description;washingInstructions;brand">
+    <values>5449000121059;012543234334;2016-09-01;Peluca Reggae;Peluca Reggae molona estilo Bob Marley;No lavar, se cuida sola;name|Levis</values>
+  </initialDataLoads>
+</dc:Domain>
